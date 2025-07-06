@@ -1,0 +1,70 @@
+.counter-section {
+    background: url('https://thumbs.dreamstime.com/b/collection-colorful-aprons-displayed-wall-collection-colorful-aprons-displayed-wall-high-resolutions-339070706.jpg') no-repeat center center/cover;
+    padding: 100px 20px;
+    position: relative;
+    color: var(--color-white);
+    text-align: center;
+    overflow: hidden;
+}
+
+.counter-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* dark overlay */
+    z-index: 1;
+}
+
+.counter-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.counters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.counter-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-white);
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease;
+}
+
+.counter-box:hover {
+    transform: translateY(-6px);
+}
+
+.counter {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--color-white);
+    margin-bottom: 10px;
+}
+
+.counter-box p {
+    font-size: 16px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+    .counter {
+        font-size: 32px;
+    }
+
+    .counter-box p {
+        font-size: 14px;
+    }
+}
