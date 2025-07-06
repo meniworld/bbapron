@@ -121,6 +121,11 @@
 
 /* Responsive */
 @media (max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+
+    }
+
     .category-card img {
         height: 180px;
     }

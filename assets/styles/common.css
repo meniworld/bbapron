@@ -12,7 +12,7 @@
     --color-accent: #f5f5f5;
 
     --transition-fast: 0.3s ease;
-    --border-radius: 6px;
+    --border-radius: 8px;
 }
 
 /* 2. Global Reset */
@@ -68,6 +68,8 @@ a.btn {
     appearance: none;
     border: none;
     text-decoration: none;
+    border: 2px solid var(--color-black);
+    font-weight: 700;
 }
 
 /* Primary */
@@ -87,7 +89,7 @@ a.btn {
 .btn-secondary {
     background-color: var(--color-white);
     color: var(--color-black);
-    border: 2px solid var(--color-black) !important;
+    border: 2px solid var(--color-black);
 }
 
 .btn-secondary:hover {
