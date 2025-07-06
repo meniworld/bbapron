@@ -1,13 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BB Apron - Home</title>
     <link rel="stylesheet" href="assets/styles/common.css">
     <link rel="stylesheet" href="assets/styles/common-form.css">
+    <link rel="stylesheet" href="assets/styles/navbar.css">
+    <link rel="stylesheet" href="assets/styles/hero-section.css">
+    <link rel="stylesheet" href="assets/styles/categories-section.css">
 </head>
+
 <body>
-    
+    <nav>
+        <div class="nav-container">
+            <img src="assets/images/logo/logo-transparent.png" alt="" class="logo-img">
+
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#">Home</a>
+                <div class="dropdown">
+                    <a href="#">Shop</a>
+                    <div class="dropdown-content">
+                        <a href="#">Men's Aprons</a>
+                        <a href="#">Women's Aprons</a>
+                        <a href="#">Kids</a>
+                    </div>
+                </div>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+        <img src="https://media.istockphoto.com/id/1212690639/photo/confident-male-chef-in-commercial-kitchen.jpg?s=612x612&w=0&k=20&c=loD7DYW1YXmWXl74QCQxH4f8mWaOUAxzFRI_G1hxKwE="
+            alt="Apron Banner" class="hero-bg-img" />
+
+        <div class="hero-content">
+            <h1>Aprons that Define You</h1>
+            <p>Discover stylish, durable aprons made for chefs, artists, and creators. 100% black & white vibes.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Shop Now</a>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="featured-section">
+        <div class="featured-container">
+            <h2 class="featured-title">Featured Categories</h2>
+
+            <div class="categories-grid">
+                <a href="#" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/776/776688.png" alt="Men's Aprons" />
+                    <div class="category-name">Men's Aprons</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/7923/7923395.png" alt="Women's Aprons" />
+                    <div class="category-name">Women's Aprons</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6946/6946956.png" alt="Chef Style" />
+                    <div class="category-name">Kids</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4532/4532573.png" alt="Kids Aprons" />
+                    <div class="category-name">Chef Style</div>
+                </a>
+
+                <!-- Show More Card -->
+                <a href="#" class="category-card show-more-card">
+                    <div class="show-more-icon">+</div>
+                    <div class="category-name">Show More</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script src="assets/scripts/navbar.js"></script>
 </body>
+
 </html>
