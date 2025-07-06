@@ -1,0 +1,78 @@
+/* common-form.css */
+
+.form-control-wrapper form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-control-wrapper .form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-control-wrapper input,
+.form-control-wrapper textarea,
+.form-control-wrapper select {
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 16px;
+    border: 1px solid var(--color-black);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-control-wrapper input:focus,
+.form-control-wrapper textarea:focus,
+.form-control-wrapper select:focus {
+    border-color: var(--color-secondary);
+}
+
+/* Floating Label */
+.form-control-wrapper label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    background-color: var(--color-bg);
+    color: var(--color-secondary);
+    font-size: 16px;
+    padding: 0 5px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.form-control-wrapper input:focus+label,
+.form-control-wrapper input:not(:placeholder-shown)+label,
+.form-control-wrapper textarea:focus+label,
+.form-control-wrapper textarea:not(:placeholder-shown)+label,
+.form-control-wrapper select:focus+label,
+.form-control-wrapper select:valid+label {
+    top: -8px;
+    left: 10px;
+    font-size: 13px;
+    color: var(--color-black);
+}
+
+/* Submit Button */
+.form-control-wrapper .btn-submit {
+    display: inline-block;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+.form-control-wrapper .btn-submit:hover {
+    background-color: transparent;
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+}
