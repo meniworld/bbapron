@@ -1,0 +1,132 @@
+.customer-reviews-section {
+    background: linear-gradient(to right, #f5f5f5, #ffffff);
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 36px;
+    color: var(--color-black);
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+.review-card {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    text-align: left;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.review-card:hover {
+    transform: translateY(-6px);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.review-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-black);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.review-info h4 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-black);
+}
+
+.review-stars {
+    color: gold;
+    font-size: 16px;
+}
+
+.review-body p {
+    font-size: 16px;
+    color: var(--color-secondary);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 25px;
+}
+
+.review-body p::before {
+    content: "“";
+    font-size: 50px;
+    position: absolute;
+    left: 0;
+    top: -10px;
+    color: var(--color-primary);
+}
+
+/* Give Review Button */
+.review-button {
+    margin-top: 60px;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 26px;
+    }
+
+    .review-body p {
+        font-size: 14px;
+    }
+}
