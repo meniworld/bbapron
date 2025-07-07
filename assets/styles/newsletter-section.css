@@ -9,7 +9,7 @@
 }
 
 .newsletter-overlay {
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.575);
     padding: 60px 20px;
     border-radius: var(--border-radius);
     animation: fadeIn 2s ease-in-out;
