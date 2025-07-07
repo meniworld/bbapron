@@ -19,20 +19,19 @@
 </head>
 
 <body>
+    <!-- Nav Bar Section -->
     <nav>
         <div class="nav-container">
-            <img src="assets/images/logo/logo-transparent.png" alt="" class="logo-img">
+            <a href="index.html"><img src="assets/images/logo/logo-transparent.png" alt="Logo" class="logo-img" /></a>
 
-            <div class="nav-toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
 
+            <!-- Navigation Links -->
             <div class="nav-links" id="nav-links">
-                <a href="#">Home</a>
                 <div class="dropdown">
-                    <a href="#">Shop</a>
+                    <a href="#">
+                        Shop
+                        <img src="assets/images/icons/down-arrow.png" alt="Down" class="down-icon" />
+                    </a>
                     <div class="dropdown-content">
                         <a href="#">Men's Aprons</a>
                         <a href="#">Women's Aprons</a>
@@ -43,8 +42,23 @@
                 <a href="#">Contact</a>
                 <a href="#">Login</a>
             </div>
+            <!-- Menu Toggle and Cart Wrapper -->
+            <div class="nav-actions">
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="" class="cart-wrapper">
+                    <img src="assets/images/icons/cart/trolley.png" alt="Cart Icon" class="cart-icon" />
+                    <span class="cart-badge">0</span>
+                </a>
+
+            </div>
         </div>
     </nav>
+
+
 
     <!-- Hero Section -->
 
@@ -580,7 +594,8 @@
             <span id="year">&copy; 2025 BBApron. All rights reserved.</span>
             <span class="made-by">
                 Made By
-                <a href="https://meniworld.com" target="_blank"><img src="assets/images/logo/MW/MENI WORLD trans no text.png" alt="Logo" class="made-by-logo" /></a>
+                <a href="https://meniworld.com" target="_blank"><img
+                        src="assets/images/logo/MW/MENI WORLD trans no text.png" alt="Logo" class="made-by-logo" /></a>
             </span>
         </div>
     </footer>
