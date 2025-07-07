@@ -108,3 +108,7 @@ a.btn {
     background-color: var(--color-black);
     color: var(--color-white);
 }
+
+.main-section{
+    margin: 120px 0;
+}
