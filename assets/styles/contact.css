@@ -13,7 +13,7 @@
 .contact-form-area,
 .contact-info-area {
     flex: 1 1 500px;
-    min-width: 300px;
+    min-width: 240px;
 }
 
 .contact-title {
@@ -32,11 +32,28 @@
 }
 
 .map-wrapper {
-    margin: 30px 0;
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
     border: 1px solid #ccc;
     border-radius: var(--border-radius);
-    overflow: hidden;
+    margin: 30px 0;
+    width: 100%;
+    max-width: 100%;
 }
+
+.map-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+    display: block;
+}
+
 
 .social-icons {
     display: flex;
@@ -66,18 +83,50 @@
     }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .contact-wrapper {
-        flex-direction: column;
-    }
-
+/* ✅ Your original 1080px responsive style */
+@media (max-width: 1080px) {
     .contact-title {
         font-size: 24px;
         text-align: center;
     }
 
+    .map-wrapper {
+        width: 100%;
+    }
+
+    .contact-details p {
+        text-align: center;
+    }
+
     .social-icons {
         justify-content: center;
+    }
+}
+
+/* ✅ Your original 768px responsive style */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+}
+
+/* ✅ Just fix iframe for tiny screens under 400px (including 320px, 280px, etc.) */
+@media (max-width: 400px) {
+    .map-wrapper iframe {
+        height: 200px;
+    }
+
+    .contact-wrapper {
+        padding: 0 10px;
+    }
+
+    .contact-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .social-icons img {
+        width: 28px;
+        height: 28px;
     }
 }
