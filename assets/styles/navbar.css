@@ -1,5 +1,3 @@
-/* navbar.css */
-
 nav {
     width: 100%;
     position: fixed;
@@ -18,16 +16,20 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
-.nav-logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--color-black);
-}
-.logo-img{
+.logo-img {
     width: 80px;
 }
+
+.nav-actions {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 16px;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -40,6 +42,9 @@ nav {
     text-transform: uppercase;
     position: relative;
     padding: 8px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .nav-links .dropdown {
@@ -51,7 +56,7 @@ nav {
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 150px;
+    min-width: 260px;
     background-color: var(--color-white);
     border: 1px solid var(--color-black);
     z-index: 10;
@@ -68,6 +73,39 @@ nav {
     border-bottom: 1px solid var(--color-accent);
 }
 
+.down-icon {
+    width: 12px;
+    height: 12px;
+}
+
+/* Cart Icon */
+.cart-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cart-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background-color: black;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+/* Hamburger Menu Toggle */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -96,7 +134,13 @@ nav {
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* Responsive */
 @media (max-width: 768px) {
+    .nav-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
     .nav-links {
         position: absolute;
         top: 100%;
@@ -106,6 +150,7 @@ nav {
         background: var(--color-white);
         display: none;
         border-top: 1px solid var(--color-black);
+        padding-bottom: 10px;
     }
 
     .nav-links.show {
@@ -122,8 +167,13 @@ nav {
     .nav-toggle {
         display: flex;
     }
+
+    .nav-actions {
+        order: 2;
+    }
 }
 
+/* Animations */
 @keyframes slideDown {
     from {
         opacity: 0;
