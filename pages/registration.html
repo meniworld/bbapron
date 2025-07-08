@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../assets/styles/testimonial-section.css">
     <link rel="stylesheet" href="../assets/styles/footer.css">
     <link rel="stylesheet" href="../assets/styles/contact.css">
-    <link rel="stylesheet" href="../assets/styles/login.css">
+    <link rel="stylesheet" href="../assets/styles/registration.css">
 </head>
 
 <body>
@@ -63,42 +63,49 @@
     </nav>
 
     <section class="main-section">
-        <section class="login-wrapper">
-            <div class="login-card animate-fade">
-                <h2 class="login-title">Welcome Back</h2>
-                <p class="login-subtitle">Please login to your account</p>
+        <section class="register-wrapper">
+            <section class="register-card form-control-wrapper" aria-label="User registration form">
+                <h2>Create an Account</h2>
+                <form action="#" method="POST" novalidate>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" required placeholder=" " autocomplete="name" />
+                        <label for="name">Full Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel" />
+                        <label for="phone">Phone Number (optional)</label>
+                    </div>
+                    <div class="form-group password-wrapper">
+                        <input type="password" id="password" name="password" required placeholder=" "
+                            autocomplete="new-password" minlength="8" />
+                        <label for="password">Password</label>
+                        <button type="button" class="password-toggle" aria-label="Toggle password visibility"
+                            tabindex="-1">
+                            Show
+                        </button>
+                    </div>
+                    <div class="form-group password-wrapper">
+                        <input type="password" id="confirm-password" name="confirm-password" required placeholder=" "
+                            autocomplete="new-password" minlength="8" />
+                        <label for="confirm-password">Confirm Password</label>
+                        <button type="button" class="password-toggle" aria-label="Toggle confirm password visibility"
+                            tabindex="-1">
+                            Show
+                        </button>
+                    </div>
 
-                <div class="form-control-wrapper">
-                    <form action="/login" method="POST">
-                        <!-- Email -->
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" placeholder=" " required>
-                            <label for="email">Email </label>
-                        </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
 
-                        <!-- Password -->
-                        <div class="form-group password-group">
-                            <input type="password" name="password" id="password" placeholder=" " required>
-                            <label for="password">Password</label>
-                            <button type="button" id="togglePassword" aria-label="Show/Hide Password">Show</button>
-                        </div>
-
-                        <!-- Remember Me & Forgot Password on same line -->
-                        <div class="form-group remember-forgot-wrapper">
-                            <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
-                        </div>
-
-
-                        <!-- Submit -->
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
-                <div class="register-link">
-                    Don't have an account? <a href="registration.html">Register here</a>
-                </div>
-            </div>
+                <p class="login-link">
+                    Already have an account? <a href="login.html">Login here</a>
+                </p>
+            </section>
         </section>
-
 
     </section>
 
@@ -198,7 +205,7 @@
     <script src="../assets/scripts/partner-section.js"></script>
     <script src="../assets/scripts/footer.js"></script>
     <script src="../assets/scripts/login.js"></script>
-
+    <script src="../assets/scripts/registration.js"></script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
     background-color: var(--color-white);
     padding: 40px;
     border-radius: 16px;
-    max-width: 480px;
+    max-width: 600px;
     width: 100%;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -77,7 +77,6 @@
 .password-group input {
     width: 100%;
     padding-right: 50px;
-    /* space for toggle button */
     box-sizing: border-box;
 }
 

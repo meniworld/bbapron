@@ -1,0 +1,109 @@
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    animation: fadeInBackground 1.2s ease forwards;
+}
+
+/* Card style */
+.register-card {
+    background: var(--color-white);
+    padding: 40px 30px 50px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    animation: slideUpFade 0.8s ease forwards;
+    position: relative;
+}
+
+/* Form Title */
+.register-card h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: var(--color-black);
+    text-align: center;
+    letter-spacing: 1.5px;
+    user-select: none;
+    animation: fadeInText 1s ease forwards;
+}
+
+/* Password show/hide toggle */
+.password-wrapper {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--color-secondary);
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: var(--color-primary);
+}
+
+/* Link to Login */
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+}
+
+.login-link a {
+    color: var(--color-primary);
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    color: var(--color-black);
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeInBackground {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
