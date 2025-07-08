@@ -1,0 +1,163 @@
+.about-page {
+    padding: 80px 20px;
+    animation: fadeInUp 1.2s ease forwards;
+}
+
+.about-wrapper {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.about-text {
+    flex: 1 1 500px;
+}
+
+.about-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--color-black);
+    text-transform: uppercase;
+    animation: fadeInUp 0.8s ease;
+}
+
+.about-text p {
+    font-size: 16px;
+    color: var(--color-secondary);
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .about-wrapper {
+        flex-direction: column-reverse;
+        gap: 30px;
+        text-align: center;
+    }
+
+}
+
+.why-choose-us-section {
+    padding: 80px 20px;
+    background-color: var(--color-accent);
+    animation: fadeInUp 1.2s ease forwards;
+}
+
+.why-choose-us-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--color-black);
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    animation: fadeInUp 0.8s ease;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.reason-card {
+    background-color: var(--color-white);
+    border: 1px solid #ddd;
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 1s ease;
+}
+
+.reason-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.reason-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.reason-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: var(--color-black);
+}
+
+.reason-card p {
+    font-size: 15px;
+    color: var(--color-secondary);
+    line-height: 1.6;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 320px) {
+    .why-choose-us-section {
+        padding: 60px 10px;
+    }
+
+    .reasons-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .reason-card img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .reason-card h3 {
+        font-size: 18px;
+    }
+
+    .reason-card p {
+        font-size: 14px;
+    }
+}
