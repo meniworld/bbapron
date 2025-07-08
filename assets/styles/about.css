@@ -255,3 +255,86 @@
         left: -10px;
     }
 }
+
+.mission-vision-section {
+    padding: 80px 20px;
+    background-color: var(--color-accent);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.mission-vision-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--color-black);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    animation: fadeInUp 0.8s ease;
+}
+
+.mission-vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.mv-card {
+    background-color: var(--color-accent);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    animation: fadeInUp 1.2s ease;
+    transition: transform 0.3s ease;
+}
+
+.mv-card:hover {
+    transform: translateY(-10px);
+}
+
+.mv-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--color-black);
+}
+
+.mv-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-secondary);
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 320px) {
+    .mission-vision-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 26px;
+    }
+
+    .mv-card h3 {
+        font-size: 20px;
+    }
+
+}
