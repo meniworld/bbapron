@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../assets/styles/testimonial-section.css">
     <link rel="stylesheet" href="../assets/styles/footer.css">
     <link rel="stylesheet" href="../assets/styles/contact.css">
-    <link rel="stylesheet" href="../assets/styles/user-dashboard.css">
+    <link rel="stylesheet" href="../assets/styles/user-whitelist.css">
 </head>
 
 <body>
@@ -49,9 +49,9 @@
                         <img src="../assets/images/icons/down-arrow.png" alt="Down" class="down-icon" />
                     </a>
                     <div class="dropdown-content">
-                        <a href="user-whitelist.html">Whitelist</a>
-                        <a href="user-profile.html">My Profile</a>
-                        <a href="user-password-change.html">Change Password</a>
+                        <a href="#">Whitelist</a>
+                        <a href="#">My Information</a>
+                        <a href="#">Change Password</a>
                     </div>
                 </div>
                 <!-- <a href="#">About</a>
@@ -75,74 +75,91 @@
     </nav>
 
     <section class="main-section">
-        <section class="dashboard-section">
-            <div class="dashboard-header">
-                <h2 class="dashboard-title">Welcome to Your Dashboard</h2>
-                <p class="dashboard-subtitle">Track your recent activities and order summary</p>
-            </div>
 
-            <!-- Stats Cards -->
-            <div class="dashboard-stats">
-                <div class="dashboard-card">
-                    <h3>My Total Orders</h3>
-                    <span class="dashboard-count">3</span>
-                </div>
-                <div class="dashboard-card pending">
-                    <h3>Pending Orders</h3>
-                    <span class="dashboard-count">3</span>
-                </div>
-                <div class="dashboard-card received">
-                    <h3>Received Orders</h3>
-                    <span class="dashboard-count">12</span>
-                </div>
-                <div class="dashboard-card canceled">
-                    <h3>Canceled Orders</h3>
-                    <span class="dashboard-count">1</span>
-                </div>
-            </div>
+        <section class="wishlist-section">
+            <div class="wishlist-container">
+                <h2 class="wishlist-title">My Wishlist</h2>
+                <p class="wishlist-subtitle">Items you’ve saved for later</p>
 
-            <!-- Recent Orders Table -->
-            <div class="dashboard-orders">
-                <h3 class="orders-title">Recent Orders</h3>
-                <div class="orders-table-wrapper">
-                    <table class="orders-table">
-                        <thead>
-                            <tr>
-                                <th>#Order ID</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Total</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#A1234</td>
-                                <td>Jul 8, 2025</td>
-                                <td><span class="status received">Received</span></td>
-                                <td>$120.00</td>
-                                <td><a href="#" class="view-link">View</a></td>
-                            </tr>
-                            <tr>
-                                <td>#A1235</td>
-                                <td>Jul 6, 2025</td>
-                                <td><span class="status pending">Pending</span></td>
-                                <td>$89.00</td>
-                                <td><a href="#" class="view-link">View</a></td>
-                            </tr>
-                            <tr>
-                                <td>#A1236</td>
-                                <td>Jul 4, 2025</td>
-                                <td><span class="status canceled">Canceled</span></td>
-                                <td>$43.50</td>
-                                <td><a href="#" class="view-link">View</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="wishlist-grid">
+                    <!-- Wishlist Item 1 -->
+                    <div class="wishlist-card">
+                        <img src="https://www.gstatic.com/webp/gallery/2.jpg" alt="Apron" class="wishlist-img" />
+                        <div class="wishlist-content">
+                            <h4 class="wishlist-product-title">Classic Apron</h4>
+                            <p class="wishlist-price">$30.00</p>
+                            <div class="wishlist-actions">
+                                <button class="btn btn-primary">Add to Cart</button>
+                                <button class="btn btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 2 -->
+                    <div class="wishlist-card">
+                        <img src="https://www.gstatic.com/webp/gallery/3.jpg" alt="Chef Hat" class="wishlist-img" />
+                        <div class="wishlist-content">
+                            <h4 class="wishlist-product-title">Chef Hat</h4>
+                            <p class="wishlist-price">$18.00</p>
+                            <div class="wishlist-actions">
+                                <button class="btn btn-primary">Add to Cart</button>
+                                <button class="btn btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Wishlist Item 1 -->
+                    <div class="wishlist-card">
+                        <img src="https://www.gstatic.com/webp/gallery/2.jpg" alt="Apron" class="wishlist-img" />
+                        <div class="wishlist-content">
+                            <h4 class="wishlist-product-title">Classic Apron</h4>
+                            <p class="wishlist-price">$30.00</p>
+                            <div class="wishlist-actions">
+                                <button class="btn btn-primary">Add to Cart</button>
+                                <button class="btn btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 2 -->
+                    <div class="wishlist-card">
+                        <img src="https://www.gstatic.com/webp/gallery/3.jpg" alt="Chef Hat" class="wishlist-img" />
+                        <div class="wishlist-content">
+                            <h4 class="wishlist-product-title">Chef Hat</h4>
+                            <p class="wishlist-price">$18.00</p>
+                            <div class="wishlist-actions">
+                                <button class="btn btn-primary">Add to Cart</button>
+                                <button class="btn btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Wishlist Item 1 -->
+                    <div class="wishlist-card">
+                        <img src="https://www.gstatic.com/webp/gallery/2.jpg" alt="Apron" class="wishlist-img" />
+                        <div class="wishlist-content">
+                            <h4 class="wishlist-product-title">Classic Apron</h4>
+                            <p class="wishlist-price">$30.00</p>
+                            <div class="wishlist-actions">
+                                <button class="btn btn-primary">Add to Cart</button>
+                                <button class="btn btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 2 -->
+                    <div class="wishlist-card">
+                        <img src="https://www.gstatic.com/webp/gallery/3.jpg" alt="Chef Hat" class="wishlist-img" />
+                        <div class="wishlist-content">
+                            <h4 class="wishlist-product-title">Chef Hat</h4>
+                            <p class="wishlist-price">$18.00</p>
+                            <div class="wishlist-actions">
+                                <button class="btn btn-primary">Add to Cart</button>
+                                <button class="btn btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
 
     </section>
 
