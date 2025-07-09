@@ -37,10 +37,9 @@
                         <img src="../assets/images/icons/down-arrow.png" alt="Down" class="down-icon" />
                     </a>
                     <div class="dropdown-content">
-                        <a href="order-pending.html">Pending Orders</a>
-                        <a href="order-received.html">Received Orders</a>
-                        <a href="order-canceled.html">Canceled order</a>
-                        <a href="orders.html">All orders</a>
+                        <a href="#">Pending Orders</a>
+                        <a href="#">Received Orders</a>
+                        <a href="#">Canceled order</a>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -76,34 +75,9 @@
 
     <section class="main-section">
         <section class="dashboard-section">
-            <div class="dashboard-header">
-                <h2 class="dashboard-title">Welcome to Your Dashboard</h2>
-                <p class="dashboard-subtitle">Track your recent activities and order summary</p>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="dashboard-stats">
-                <div class="dashboard-card">
-                    <h3>My Total Orders</h3>
-                    <span class="dashboard-count">3</span>
-                </div>
-                <div class="dashboard-card pending">
-                    <h3>Pending Orders</h3>
-                    <span class="dashboard-count">3</span>
-                </div>
-                <div class="dashboard-card received">
-                    <h3>Received Orders</h3>
-                    <span class="dashboard-count">12</span>
-                </div>
-                <div class="dashboard-card canceled">
-                    <h3>Canceled Orders</h3>
-                    <span class="dashboard-count">1</span>
-                </div>
-            </div>
-
             <!-- Recent Orders Table -->
             <div class="dashboard-orders">
-                <h3 class="orders-title">Recent Orders</h3>
+                <h3 class="orders-title">My Canceled Orders</h3>
                 <div class="orders-table-wrapper">
                     <table class="orders-table">
                         <thead>
@@ -111,6 +85,7 @@
                                 <th>#Order ID</th>
                                 <th>Date</th>
                                 <th>Status</th>
+                                <th>Reason</th>
                                 <th>Total</th>
                                 <th>Details</th>
                             </tr>
@@ -119,14 +94,16 @@
                             <tr>
                                 <td>#A1234</td>
                                 <td>Jul 8, 2025</td>
-                                <td><span class="status received">Received</span></td>
+                                <td><span class="status canceled">Canceled</span></td>
+                                <td>Delivery man delay</td>
                                 <td>$120.00</td>
                                 <td><a href="#" class="view-link">View</a></td>
                             </tr>
                             <tr>
                                 <td>#A1235</td>
                                 <td>Jul 6, 2025</td>
-                                <td><span class="status pending">Pending</span></td>
+                                <td><span class="status canceled">Canceled</span></td>
+                                <td>Wrong Location</td>
                                 <td>$89.00</td>
                                 <td><a href="#" class="view-link">View</a></td>
                             </tr>
@@ -134,6 +111,7 @@
                                 <td>#A1236</td>
                                 <td>Jul 4, 2025</td>
                                 <td><span class="status canceled">Canceled</span></td>
+                                <td>Delivery man delay</td>
                                 <td>$43.50</td>
                                 <td><a href="#" class="view-link">View</a></td>
                             </tr>
