@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Apron - Contact</title>
+    <link rel="stylesheet" href="../assets/styles/common.css">
+    <link rel="stylesheet" href="../assets/styles/common-form.css">
+    <link rel="stylesheet" href="../assets/styles/navbar.css">
+    <link rel="stylesheet" href="../assets/styles/hero-section.css">
+    <link rel="stylesheet" href="../assets/styles/categories-section.css">
+    <link rel="stylesheet" href="../assets/styles/product-section.css">
+    <link rel="stylesheet" href="../assets/styles/counter-section.css">
+    <link rel="stylesheet" href="../assets/styles/partner-section.css">
+    <link rel="stylesheet" href="../assets/styles/newsletter-section.css">
+    <link rel="stylesheet" href="../assets/styles/testimonial-section.css">
+    <link rel="stylesheet" href="../assets/styles/footer.css">
+    <link rel="stylesheet" href="../assets/styles/contact.css">
+</head>
+
+<body>
+    <!-- Nav Bar Section -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html"><img src="../assets/images/logo/logo-transparent.png" alt="Logo"
+                    class="logo-img" /></a>
+
+
+            <!-- Navigation Links -->
+            <div class="nav-links" id="nav-links">
+                <div class="dropdown">
+                    <a href="#">
+                        Shop
+                        <img src="../assets/images/icons/down-arrow.png" alt="Down" class="down-icon" />
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#">Men's Aprons</a>
+                        <a href="#">Women's Aprons</a>
+                        <a href="#">Kids</a>
+                        <a href="#">All</a>
+                    </div>
+                </div>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Login</a>
+            </div>
+            <!-- Menu Toggle and Cart Wrapper -->
+            <div class="nav-actions">
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="" class="cart-wrapper">
+                    <img src="../assets/images/icons/cart/trolley.png" alt="Cart Icon" class="cart-icon" />
+                    <span class="cart-badge">0</span>
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+    <section class="main-section">
+        <section class="best-sellers-section">
+            <div class="best-sellers-container">
+                <h2 class="section-title">Category Name</h2>
+
+                <!-- Mobile Filter Toggle Button -->
+                <div class="filter-toggle">
+                    <button id="filterToggleBtn">☰ Filter</button>
+                </div>
+
+                <div class="filter-sort-wrapper">
+                    <!-- Filter Sidebar -->
+                    <aside class="filter-sidebar" id="filterSidebar">
+                        <h3 class="filter-title">
+                            Filter
+                            <button class="filter-close-btn" id="filterCloseBtn">&times;</button>
+                        </h3>
+
+                        <div class="filter-group">
+                            <h4>Price Range</h4>
+                            <div class="price-inputs">
+                                <input type="number" class="filter-input" id="minPrice" min="0" value="5" />
+                                <input type="number" class="filter-input" id="maxPrice" max="500" value="100" />
+                            </div>
+                            <input type="range" id="priceRange" min="5" max="100" value="40" class="price-range" />
+                            <span class="price-label">Price: $<span id="priceValue">40</span></span>
+                        </div>
+
+
+                        <div class="filter-group">
+                            <h4>Availability</h4>
+                            <label><input type="checkbox" /> In Stock</label>
+                            <label><input type="checkbox" /> Out of Stock</label>
+                            <label><input type="checkbox" /> Pre-Order</label>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Categories</h4>
+                            <label><input type="checkbox" /> Classic Aprons</label>
+                            <label><input type="checkbox" /> Modern Aprons</label>
+                            <label><input type="checkbox" /> Kids Aprons</label>
+                            <label><input type="checkbox" /> Pro Chef Aprons</label>
+                        </div>
+
+                        <button class="btn btn-primary apply-filter-btn">Apply Filter</button>
+                    </aside>
+
+                    <!-- Product Grid + Sort -->
+                    <div class="product-content">
+                        <div class="sort-bar">
+                            <label for="sort">Sort By:</label>
+                            <select id="sort" class="filter-input">
+                                <option value="default">Default</option>
+                                <option value="price-low-high">Price: Low to High</option>
+                                <option value="price-high-low">Price: High to Low</option>
+                                <option value="newest">Newest</option>
+                            </select>
+                        </div>
+
+                        <div class="product-grid">
+                            <!-- Example Product Card -->
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img src="../assets/images/apron/apron (1).jpg" alt="Apron" class="product-img" />
+                                    <div class="product-img-overlay">Available in 4 colors</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Apron</h3>
+                                    <div class="product-price">$20</div>
+                                    <div class="product-meta">
+                                        <span class="review">❤️ <span class="count">124</span></span>
+                                        <span class="wishlist">🤍</span>
+                                    </div>
+                                    <p class="product-description">Stylish apron for everyday cooking.</p>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                        <button class="btn btn-outline">Show Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img src="../assets/images/apron/apron (1).jpg" alt="Apron" class="product-img" />
+                                    <div class="product-img-overlay">Available in 4 colors</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Apron</h3>
+                                    <div class="product-price">$20</div>
+                                    <div class="product-meta">
+                                        <span class="review">❤️ <span class="count">124</span></span>
+                                        <span class="wishlist">🤍</span>
+                                    </div>
+                                    <p class="product-description">Stylish apron for everyday cooking.</p>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                        <button class="btn btn-outline">Show Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img src="../assets/images/apron/apron (1).jpg" alt="Apron" class="product-img" />
+                                    <div class="product-img-overlay">Available in 4 colors</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Apron</h3>
+                                    <div class="product-price">$20</div>
+                                    <div class="product-meta">
+                                        <span class="review">❤️ <span class="count">124</span></span>
+                                        <span class="wishlist">🤍</span>
+                                    </div>
+                                    <p class="product-description">Stylish apron for everyday cooking.</p>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                        <button class="btn btn-outline">Show Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img src="../assets/images/apron/apron (1).jpg" alt="Apron" class="product-img" />
+                                    <div class="product-img-overlay">Available in 4 colors</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Apron</h3>
+                                    <div class="product-price">$20</div>
+                                    <div class="product-meta">
+                                        <span class="review">❤️ <span class="count">124</span></span>
+                                        <span class="wishlist">🤍</span>
+                                    </div>
+                                    <p class="product-description">Stylish apron for everyday cooking.</p>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                        <button class="btn btn-outline">Show Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img src="../assets/images/apron/apron (1).jpg" alt="Apron" class="product-img" />
+                                    <div class="product-img-overlay">Available in 4 colors</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Apron</h3>
+                                    <div class="product-price">$20</div>
+                                    <div class="product-meta">
+                                        <span class="review">❤️ <span class="count">124</span></span>
+                                        <span class="wishlist">🤍</span>
+                                    </div>
+                                    <p class="product-description">Stylish apron for everyday cooking.</p>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                        <button class="btn btn-outline">Show Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card">
+                                <div class="product-img-wrapper">
+                                    <img src="../assets/images/apron/apron (1).jpg" alt="Apron" class="product-img" />
+                                    <div class="product-img-overlay">Available in 4 colors</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Classic Apron</h3>
+                                    <div class="product-price">$20</div>
+                                    <div class="product-meta">
+                                        <span class="review">❤️ <span class="count">124</span></span>
+                                        <span class="wishlist">🤍</span>
+                                    </div>
+                                    <p class="product-description">Stylish apron for everyday cooking.</p>
+                                    <div class="product-buttons">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                        <button class="btn btn-outline">Show Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Repeat more product cards -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <!-- Contact Section -->
+            <!-- Contact Section -->
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>
+                    <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Location Icon"
+                        class="footer-icon" />
+                    123 Apron Street, London, UK
+                </p>
+                <p>
+                    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone Icon"
+                        class="footer-icon" />
+                    +44 123 4567 890
+                </p>
+                <p>
+                    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Email Icon"
+                        class="footer-icon" />
+                    support@bbapron.co.uk
+                </p>
+                <a href="mailto:support@bbapron.co.uk" class="btn btn-secondary">Contact Support</a>
+
+                <!-- Social Media Icons -->
+                <div class="footer-social-icons">
+                    <a href="#" aria-label="Facebook" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+                    </a>
+                    <a href="#" aria-label="Twitter" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" />
+                    </a>
+                    <a href="#" aria-label="Instagram" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" />
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" />
+                    </a>
+                </div>
+            </div>
+
+
+            <!-- Categories Section -->
+            <div class="footer-section categories">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Classic Aprons</a></li>
+                    <li><a href="#">Modern Aprons</a></li>
+                    <li><a href="#">Kids Aprons</a></li>
+                    <li><a href="#">Professional Aprons</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="footer-section quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Policies Section -->
+            <div class="footer-section policies">
+                <h3>Policies</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Delivery Policy</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span id="year">&copy; 2025 BBApron. All rights reserved.</span>
+            <span class="made-by">
+                Made By
+                <a href="https://meniworld.com" target="_blank"><img
+                        src="../assets/images/logo/MW/MENI WORLD trans no text.png" alt="Logo"
+                        class="made-by-logo" /></a>
+            </span>
+        </div>
+    </footer>
+
+
+    <script src="../assets/scripts/navbar.js"></script>
+    <script src="../assets/scripts/product-section.js"></script>
+    <script src="../assets/scripts/counter-section.js"></script>
+    <script src="../assets/scripts/partner-section.js"></script>
+    <script src="../assets/scripts/footer.js"></script>
+    <script src="../assets/scripts/product-section.js"></script>
+</body>
+
+</html>
