@@ -122,10 +122,6 @@
     gap: 5px;
 }
 
-.review::before {
-    content: "❤️";
-}
-
 .wishlist {
     cursor: pointer;
     font-size: 18px;
