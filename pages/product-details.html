@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BB Apron - Review</title>
+    <title>BB Apron - Product</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logo/favicon.jpg">
 
     <link rel="stylesheet" href="../assets/styles/common.css">
@@ -79,45 +79,73 @@
     </nav>
 
     <section class="main-section">
+        <section class="product-detail-section">
+            <div class="container">
+                <div class="product-detail-wrapper">
+                    <!-- Left Side -->
+                    <div class="product-left">
+                        <div class="product-image animated-slide-in">
+                            <img src="../assets/images/apron/apron (1).jpg" alt="Premium Apron">
+                        </div>
+                        <!-- Color Swatches -->
+                        <div class="product-colors">
+                            <label>Available Colors:</label>
+                            <div class="color-swatches">
+                                <span class="swatch" style="background-color: #000;"
+                                    data-image="../assets/images/apron/apron (1).jpg"></span>
+                                <span class="swatch" style="background-color: #a52a2a;"
+                                    data-image="../assets/images/apron/apron (2).jpg"></span>
+                                <span class="swatch" style="background-color: #4682b4;"
+                                    data-image="../assets/images/apron/apron (3).jpg"></span>
+                            </div>
 
-        <section class="review-section">
-            <div class="review-card">
-                <h2 class="review-title">We'd love your feedback</h2>
-                <p class="review-subtitle">Tell us what you think about our product</p>
+                        </div>
+                    </div>
 
-                <div class="review-stars" id="star-rating">
-                    <i class="star">&#9733;</i>
-                    <i class="star">&#9733;</i>
-                    <i class="star">&#9733;</i>
-                    <i class="star">&#9733;</i>
-                    <i class="star">&#9733;</i>
+                    <!-- Right Side -->
+                    <div class="product-right animated-fade-in">
+                        <h2 class="product-title">Classic Chef Apron</h2>
+                        <p class="product-price">$29.99</p>
+
+                        <!-- Size Selection -->
+                        <div class="product-option">
+                            <label for="size">Size:</label>
+                            <select id="size" class="size-select">
+                                <option value="standard">Standard</option>
+                                <option value="large">Large</option>
+                                <option value="xl">XL</option>
+                            </select>
+                        </div>
+
+                        <!-- Add to Cart -->
+                        <div class="action-buttons">
+                            <button class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-control-wrapper">
-                    <form>
-                        <div class="form-group">
-                            <textarea id="review" name="review" placeholder=" " required></textarea>
-                            <label for="review">Write your review</label>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder=" " required>
-                            <label for="name">Your Name</label>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder=" " required>
-                            <label for="email">Your Email</label>
-                        </div>
-
-                        <button type="submit" class="btn-submit">Submit Review</button>
-                    </form>
+                <!-- Long Description -->
+                <div class="product-full-description">
+                    <h3>Product Description</h3>
+                    <p>
+                        This premium-quality apron is crafted from durable cotton material. Designed with functionality
+                        and fashion in mind, it features:
+                    </p>
+                    <ul>
+                        <li>✔ Adjustable neck strap for perfect fit</li>
+                        <li>✔ Two spacious front pockets</li>
+                        <li>✔ Fade-resistant fabric for long-term use</li>
+                        <li>✔ Available in multiple stylish colors</li>
+                    </ul>
+                    <p>
+                        Perfect for chefs, bakers, grill masters, or anyone who loves cooking with style. The breathable
+                        fabric ensures comfort even during long hours of wear.
+                    </p>
                 </div>
             </div>
         </section>
-
-
     </section>
+
 
     <!-- Footer Section -->
     <footer class="site-footer">

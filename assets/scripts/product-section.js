@@ -35,12 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (showAllBtn) {
-        showAllBtn.addEventListener("click", () => {
-            alert("Redirect to All Products page or load full listing.");
-        });
-    }
-
     // ==========================
     // Filter Sidebar Toggle Logic
     // ==========================
