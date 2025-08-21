@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BB Apron — Design Your Own</title>
+    <link rel="stylesheet" href="../assets/styles/common.css" />
+
+    <style>
+        /* ---------- Wizard Layout ---------- */
+        .designer-section {
+            margin: 100px 0;
+        }
+
+        .designer-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 28px;
+        }
+
+        .steps-nav {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .step-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 2px solid var(--color-black);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14px;
+            opacity: .5;
+            transition: .25s ease;
+            background: #fff;
+        }
+
+        .step-pill.active {
+            opacity: 1;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+        }
+
+        .step-pill .num {
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #000;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .designer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* ---------- Preview ---------- */
+        .apron-stage {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            aspect-ratio: 3/4;
+            border-radius: 16px;
+            background: #f7f7f7;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .06);
+            isolation: isolate;
+            /* keep blend inside */
+        }
+
+        .apron-base {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            transition: transform .4s ease, filter .2s ease;
+        }
+
+        .apron-stage:hover .apron-base {
+            transform: scale(1.01);
+        }
+
+        /* Color tint layer (masked to the apron image) */
+        .tint-layer {
+            position: absolute;
+            inset: 0;
+            background: #ffffff;
+            opacity: .9;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            transition: background-color .2s ease, opacity .2s ease;
+            /* mask (modern) */
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            /* webkit */
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+        }
+
+        /* Dropped logos */
+        .logo-draggable {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            transform: translate(-50%, -50%);
+            cursor: move;
+            user-select: none;
+            will-change: transform;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .25));
+            transition: box-shadow .2s ease;
+        }
+
+        .logo-draggable:active {
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .25);
+        }
+
+        /* ---------- Controls ---------- */
+        .panel {
+            background: #fff;
+            border: 1px solid #000;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .panel h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .apron-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .apron-choice {
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #000;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 8px;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .apron-choice img {
+            width: 100%;
+            aspect-ratio: 1/1.2;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .apron-choice:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .10);
+        }
+
+        .apron-choice.active {
+            outline: 3px solid #000;
+        }
+
+        .color-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            cursor: pointer;
+            transition: transform .15s ease;
+        }
+
+        .swatch:hover {
+            transform: scale(1.05);
+        }
+
+        .swatch.active {
+            box-shadow: 0 0 0 3px #0005;
+        }
+
+        .logo-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo-strip img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            padding: 6px;
+            border: 1px dashed #000;
+            border-radius: 12px;
+            cursor: grab;
+            background: #fff;
+            transition: transform .2s ease;
+        }
+
+        .logo-strip img:hover {
+            transform: translateY(-2px);
+        }
+
+        .upload {
+            margin-top: 14px;
+        }
+
+        .wizard-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        /* Steps holder */
+        .step {
+            display: none;
+            animation: fadeIn .3s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .designer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .apron-stage {
+                max-width: 520px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="designer-section container">
+        <h2 class="designer-title">🎨 Design Your Own Apron</h2>
+
+        <!-- Step pills -->
+        <nav class="steps-nav" id="stepsNav">
+            <div class="step-pill active" data-i="1"><span class="num">1</span> Choose Design</div>
+            <div class="step-pill" data-i="2"><span class="num">2</span> Choose Color</div>
+            <div class="step-pill" data-i="3"><span class="num">3</span> Add Logo</div>
+            <div class="step-pill" data-i="4"><span class="num">4</span> Review & Submit</div>
+        </nav>
+
+        <div class="designer-container">
+            <!-- Live Preview -->
+            <div class="apron-stage" id="apronStage">
+                <img id="apronBase" class="apron-base" alt="Apron preview"
+                    src="https://img.freepik.com/free-psd/blank-white-apron-with-black-straps-perfect-customization_191095-80114.jpg?q=80&w=740" />
+                <div id="tintLayer" class="tint-layer"></div>
+            </div>
+
+            <!-- Right Panel (wizard steps) -->
+            <div class="panel">
+                <!-- STEP 1: DESIGN -->
+                <div class="step active" data-step="1">
+                    <h3>Step 1 — Choose an Apron Design</h3>
+                    <div class="apron-grid" id="designGrid">
+                        <!-- classic -->
+                        <div class="apron-choice active"
+                            data-src="https://img.freepik.com/free-psd/blank-white-apron-with-black-straps-perfect-customization_191095-80114.jpg?q=80&w=740"
+                            data-id="classic">
+                            <img alt="Classic straps"
+                                src="https://img.freepik.com/free-psd/blank-white-apron-with-black-straps-perfect-customization_191095-80114.jpg?q=80&w=320" />
+                        </div>
+                        <!-- pocket -->
+                        <div class="apron-choice"
+                            data-src="https://img.freepik.com/free-psd/black-apron-with-pocket-culinary-essential_191095-81401.jpg?q=80&w=740"
+                            data-id="pocket">
+                            <img alt="Pocket apron"
+                                src="https://img.freepik.com/free-psd/black-apron-with-pocket-culinary-essential_191095-81401.jpg?q=80&w=320" />
+                        </div>
+                        <!-- simple -->
+                        <div class="apron-choice"
+                            data-src="https://img.freepik.com/free-psd/gray-apron-mockup-clean-simple-design-culinary-professionals_191095-81382.jpg?q=80&w=740"
+                            data-id="simple">
+                            <img alt="Simple bib"
+                                src="https://img.freepik.com/free-psd/gray-apron-mockup-clean-simple-design-culinary-professionals_191095-81382.jpg?q=80&w=320" />
+                        </div>
+                    </div>
+
+                    <div class="wizard-actions">
+                        <span></span>
+                        <button class="btn btn-primary" id="toStep2">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: COLOR -->
+                <div class="step" data-step="2">
+                    <h3>Step 2 — Choose a Color</h3>
+                    <div class="color-row" id="colorRow">
+                        <div class="swatch active" style="background:#ffffff" data-color="#ffffff" title="White"></div>
+                        <div class="swatch" style="background:#000000" data-color="#000000" title="Black"></div>
+                        <div class="swatch" style="background:#d32f2f" data-color="#d32f2f" title="Red"></div>
+                        <div class="swatch" style="background:#1976d2" data-color="#1976d2" title="Blue"></div>
+                        <div class="swatch" style="background:#388e3c" data-color="#388e3c" title="Green"></div>
+                        <div class="swatch" style="background:#f5a623" data-color="#f5a623" title="Orange"></div>
+                    </div>
+                    <small>Tip: color is applied as a soft tint over the chosen apron image.</small>
+
+                    <div class="wizard-actions">
+                        <button class="btn btn-secondary" data-back>Back</button>
+                        <button class="btn btn-primary" id="toStep3">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: LOGO -->
+                <div class="step" data-step="3">
+                    <h3>Step 3 — Add / Upload Logo</h3>
+                    <div class="logo-strip">
+                        <!-- Flaticon CDN logos -->
+                        <img draggable="true" alt="Chef hat"
+                            src="https://cdn-icons-png.flaticon.com/512/1691/1691165.png" />
+                        <img draggable="true" alt="Coffee cup"
+                            src="https://cdn-icons-png.flaticon.com/512/3127/3127336.png" />
+                        <img draggable="true" alt="Fork & knife"
+                            src="https://cdn-icons-png.flaticon.com/512/59/59077.png" />
+                        <img draggable="true" alt="Knife & fork"
+                            src="https://cdn-icons-png.flaticon.com/512/94/94003.png" />
+                    </div>
+
+                    <div class="upload">
+                        <label class="btn btn-outline">
+                            <input type="file" id="logoUpload" accept="image/*" hidden />
+                            Upload your own logo
+                        </label>
+                    </div>
+
+                    <div class="wizard-actions">
+                        <button class="btn btn-secondary" data-back>Back</button>
+                        <button class="btn btn-primary" id="toStep4">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: REVIEW + SUBMIT -->
+                <div class="step" data-step="4">
+                    <h3>Step 4 — Review & Submit</h3>
+                    <p>Move logos if needed, then submit your design.</p>
+
+                    <div class="wizard-actions">
+                        <button class="btn btn-secondary" data-back>Back</button>
+                        <button class="btn btn-primary" id="submitBtn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // ----- Data -----
+        const steps = [...document.querySelectorAll('.step')];
+        const pills = [...document.querySelectorAll('.step-pill')];
+        let currentStep = 1;
+
+        const apronBase = document.getElementById('apronBase');
+        const tintLayer = document.getElementById('tintLayer');
+        const apronStage = document.getElementById('apronStage');
+
+        const designGrid = document.getElementById('designGrid');
+        const colorRow = document.getElementById('colorRow');
+
+        // state
+        const state = {
+            designId: 'classic',
+            designSrc: apronBase.src,
+            color: '#ffffff',
+            logos: [] // {src, x, y, w}
+        };
+
+        // ----- Helpers -----
+        function goTo(step) {
+            currentStep = step;
+            steps.forEach((el, i) => el.classList.toggle('active', (i + 1) === step));
+            pills.forEach((el, i) => el.classList.toggle('active', (i + 1) === step));
+            // ensure tint mask matches current image
+            applyMask(state.designSrc);
+        }
+
+        function applyMask(imgURL) {
+            // Use selected apron image as mask so tint stays inside the apron shape (best with transparent PNGs, decent with light JPGs).
+            tintLayer.style.maskImage = `url("${imgURL}")`;
+            tintLayer.style.webkitMaskImage = `url("${imgURL}")`;
+            // Also set a background image behind? (not needed, our <img> handles base)
+        }
+
+        function setColor(hex) {
+            state.color = hex;
+            tintLayer.style.backgroundColor = hex;
+            // if black, increase opacity a bit
+            tintLayer.style.opacity = (hex.toLowerCase() === '#000000') ? .95 : .9;
+        }
+
+        // ----- Step 1: choose design -----
+        designGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.apron-choice');
+            if (!card) return;
+            designGrid.querySelectorAll('.apron-choice').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            const url = card.dataset.src;
+            const id = card.dataset.id;
+            state.designId = id;
+            state.designSrc = url;
+            apronBase.src = url;
+            applyMask(url);
+        });
+
+        // ----- Step 2: color -----
+        colorRow.addEventListener('click', (e) => {
+            const sw = e.target.closest('.swatch');
+            if (!sw) return;
+            colorRow.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+            sw.classList.add('active');
+            setColor(sw.dataset.color);
+        });
+        // default color
+        setColor('#ffffff');
+        applyMask(state.designSrc);
+
+        // ----- Drag & Drop logos into stage -----
+        document.querySelectorAll('.logo-strip img').forEach(logo => {
+            logo.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('src', e.target.src);
+            });
+        });
+
+        apronStage.addEventListener('dragover', e => e.preventDefault());
+        apronStage.addEventListener('drop', e => {
+            e.preventDefault();
+            const src = e.dataTransfer.getData('src');
+            if (!src) return;
+            spawnLogo(src, apronStage.clientWidth / 2, apronStage.clientHeight / 2);
+        });
+
+        // Upload own logo
+        document.getElementById('logoUpload').addEventListener('change', e => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                spawnLogo(ev.target.result, apronStage.clientWidth / 2, apronStage.clientHeight / 2);
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        });
+
+        function spawnLogo(src, x, y) {
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'logo-draggable';
+            apronStage.appendChild(img);
+            makeDraggable(img);
+            // place
+            const rect = apronStage.getBoundingClientRect();
+            img.style.left = (x) + 'px';
+            img.style.top = (y) + 'px';
+        }
+
+        function makeDraggable(el) {
+            let isDown = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+            el.addEventListener('mousedown', (e) => {
+                isDown = true;
+                el.style.cursor = 'grabbing';
+                startX = e.clientX; startY = e.clientY;
+                const cs = getComputedStyle(el);
+                startLeft = parseFloat(cs.left); startTop = parseFloat(cs.top);
+            });
+            document.addEventListener('mouseup', () => { isDown = false; el.style.cursor = 'move'; });
+            document.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                const newL = startLeft + dx;
+                const newT = startTop + dy;
+                // constrain into stage
+                const st = apronStage.getBoundingClientRect();
+                const r = el.getBoundingClientRect();
+                const pad = 10;
+                const maxL = st.width - r.width / 2 - pad;
+                const minL = r.width / 2 + pad;
+                const maxT = st.height - r.height / 2 - pad;
+                const minT = r.height / 2 + pad;
+                el.style.left = Math.min(Math.max(newL, minL), maxL) + 'px';
+                el.style.top = Math.min(Math.max(newT, minT), maxT) + 'px';
+            });
+            // resize with wheel (nice!)
+            el.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const curW = el.getBoundingClientRect().width;
+                const next = Math.min(260, Math.max(40, curW + (e.deltaY < 0 ? 10 : -10)));
+                el.style.width = next + 'px';
+            }, { passive: false });
+        }
+
+        // ----- Step nav buttons -----
+        document.getElementById('toStep2').addEventListener('click', () => goTo(2));
+        document.getElementById('toStep3').addEventListener('click', () => goTo(3));
+        document.getElementById('toStep4').addEventListener('click', () => goTo(4));
+        document.querySelectorAll('[data-back]').forEach(btn => btn.addEventListener('click', () => goTo(Math.max(1, currentStep - 1))));
+
+        // ----- Submit (collect simple payload) -----
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            // collect logo positions relative to stage
+            const payload = {
+                designId: state.designId,
+                designSrc: state.designSrc,
+                color: state.color,
+            };
+            console.log('SUBMIT PAYLOAD:', payload);
+            alert('✅ Design submitted!\n(See console for payload)');
+        });
+    </script>
+</body>
+
+</html>
