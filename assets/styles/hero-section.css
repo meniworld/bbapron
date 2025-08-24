@@ -234,7 +234,6 @@
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        height: 70vh;
     }
 
     .hero-slide {
@@ -245,8 +244,7 @@
         transition: none;
     }
 
-    .hero-controls,
-    .hero-dots {
+    .hero-controls {
         display: none;
     }
 
