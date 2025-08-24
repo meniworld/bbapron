@@ -52,13 +52,9 @@
 
 .hero-slide {
     display: flex;
-    /* Flexbox for centering */
     justify-content: center;
-    /* Center horizontally */
     align-items: center;
-    /* Center vertically */
     flex-direction: column;
-    /* Stack h1, p, buttons */
     text-align: center;
     padding: 0 20px;
 }
@@ -78,7 +74,7 @@
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: 48px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 15px;
@@ -88,7 +84,7 @@
 }
 
 .hero-content p {
-    font-size: 1.2rem;
+    font-size: 24px;
     line-height: 1.6;
     margin-bottom: 25px;
     color: #eee;
@@ -239,15 +235,19 @@
     }
 
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 42px;
     }
 
     .hero-content p {
-        font-size: 1rem;
+        font-size: 20px;
     }
 
     .hero-buttons {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .hero-controls span {
+        display: none;
     }
 }
