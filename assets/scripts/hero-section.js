@@ -6,50 +6,53 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     let slideInterval;
 
-    // Create dots
-    slides.forEach((_, i) => {
-        const dot = document.createElement("span");
-        if (i === 0) dot.classList.add("active");
-        dotsContainer.appendChild(dot);
-        dot.addEventListener("click", () => goToSlide(i));
-    });
-
-    const dots = document.querySelectorAll(".hero-dots span");
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle("active", i === index);
-            dots[i].classList.toggle("active", i === index);
+    // Only run slider logic on desktop
+    if (window.innerWidth > 768) {
+        // Create dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement("span");
+            if (i === 0) dot.classList.add("active");
+            dotsContainer.appendChild(dot);
+            dot.addEventListener("click", () => goToSlide(i));
         });
-    }
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
-    }
+        const dots = document.querySelectorAll(".hero-dots span");
 
-    function prevSlideFn() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        showSlide(currentIndex);
-    }
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+                dots[i].classList.toggle("active", i === index);
+            });
+        }
 
-    function goToSlide(index) {
-        currentIndex = index;
-        showSlide(currentIndex);
-        resetInterval();
-    }
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
 
-    prev.addEventListener("click", () => { prevSlideFn(); resetInterval(); });
-    next.addEventListener("click", () => { nextSlide(); resetInterval(); });
+        function prevSlideFn() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+        }
 
-    function startAutoSlide() {
-        slideInterval = setInterval(nextSlide, 5000); // 5s auto-slide
-    }
+        function goToSlide(index) {
+            currentIndex = index;
+            showSlide(currentIndex);
+            resetInterval();
+        }
 
-    function resetInterval() {
-        clearInterval(slideInterval);
+        prev.addEventListener("click", () => { prevSlideFn(); resetInterval(); });
+        next.addEventListener("click", () => { nextSlide(); resetInterval(); });
+
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, 5000); // 5s auto-slide
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
         startAutoSlide();
     }
-
-    startAutoSlide();
 });
