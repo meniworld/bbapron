@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Your Custom Apron</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #ffd166;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .progress-bar {
+            position: absolute;
+            height: 6px;
+            background: #e0e0e0;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .progress-fill {
+            position: absolute;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: width 0.5s ease;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #e0e0e0;
+            font-weight: bold;
+            color: #999;
+            z-index: 3;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .step.completed {
+            border-color: var(--secondary);
+            background: var(--secondary);
+            color: white;
+        }
+
+        .step-label {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 1rem 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .option-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-item:hover {
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .option-item.selected {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .option-item img {
+            max-width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .color-option.selected {
+            transform: scale(1.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .preview-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .apron-preview {
+            width: 300px;
+            height: 350px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            background-color: #ff6b6b;
+        }
+
+        .customization-area {
+            margin-top: 2rem;
+        }
+
+        .custom-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .control-group {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .control-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #3dbbb3;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .navigation-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .text-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .size-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .size-option {
+            padding: 1rem 2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .size-option:hover {
+            border-color: var(--secondary);
+        }
+
+        .size-option.selected {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .logo-preview {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .draggable-item {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            bottom: 0;
+            right: 0;
+            cursor: nwse-resize;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .text-element {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            z-index: 10;
+        }
+
+        .text-control-panel {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-effect-options {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .text-effect-btn {
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .text-effect-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .apron-preview {
+                width: 250px;
+                height: 300px;
+            }
+
+            .custom-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .text-controls {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .design-element-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .design-element-btn {
+            padding: 0.4rem 0.8rem;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .design-element-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .logo-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .logo-option {
+            width: 80px;
+            height: 80px;
+            padding: 0.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-option:hover {
+            border-color: var(--secondary);
+        }
+
+        .logo-option.selected {
+            border-color: var(--primary);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .logo-option img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Design Your Custom Apron</h1>
+            <p>Create a unique apron in just 3 simple steps - choose style, add personalization, and order!</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-fill" id="progressFill"></div>
+
+            <div class="step completed" id="step1">
+                1
+                <div class="step-label">Style</div>
+            </div>
+            <div class="step active" id="step2">
+                2
+                <div class="step-label">Color</div>
+            </div>
+            <div class="step" id="step3">
+                3
+                <div class="step-label">Design</div>
+            </div>
+            <div class="step" id="step4">
+                4
+                <div class="step-label">Order</div>
+            </div>
+        </div>
+
+        <!-- Step 1: Style Selection -->
+        <div class="step-content active" id="styleStep">
+            <div class="card">
+                <h2 class="card-title">Choose Your Apron Style</h2>
+                <div class="options-grid">
+                    <div class="option-item selected">
+                        <img src="../assets/images/apron/apron (1).jpg" alt="Bib Apron">
+                        <h3>Bib Apron</h3>
+                        <p>Full coverage classic design</p>
+                    </div>
+                    <div class="option-item">
+                        <img src="../assets/images/apron/apron (2).jpg" alt="Waist Apron">
+                        <h3>Waist Apron</h3>
+                        <p>Simple waist-only style</p>
+                    </div>
+                    <div class="option-item">
+                        <img src="../assets/images/apron/apron (3).jpg" alt="Chef Apron">
+                        <h3>Chef Apron</h3>
+                        <p>Professional kitchen style</p>
+                    </div>
+                    <div class="option-item">
+                        <img src="../assets/images/apron/apron (1).jpg" alt="Custom Shape">
+                        <h3>Custom Shape</h3>
+                        <p>Unique design pattern</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-btns">
+                <div></div> <!-- Empty div for spacing -->
+                <button class="btn" onclick="showStep(2)">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Color Selection -->
+        <div class="step-content" id="colorStep">
+            <div class="card">
+                <h2 class="card-title">Choose Apron Color</h2>
+                <div class="color-options">
+                    <div class="color-option selected" style="background-color: #ff6b6b;"></div>
+                    <div class="color-option" style="background-color: #4ecdc4;"></div>
+                    <div class="color-option" style="background-color: #ffd166;"></div>
+                    <div class="color-option" style="background-color: #1a1a2e;"></div>
+                    <div class="color-option" style="background-color: #6a0572;"></div>
+                    <div class="color-option" style="background-color: #06d6a0;"></div>
+                </div>
+
+                <div class="preview-container">
+                    <div class="apron-preview" id="apronPreview">
+                        <!-- Apron preview with style -->
+                        <img src="../assets/images/apron/apron (1).jpg" alt="Apron Style"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-btns">
+                <button class="btn btn-outline" onclick="showStep(1)">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="btn" onclick="showStep(3)">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Customization -->
+        <div class="step-content" id="customizeStep">
+            <div class="card">
+                <h2 class="card-title">Customize Your Apron</h2>
+
+                <div class="preview-container">
+                    <div class="apron-preview" id="customizationArea">
+                        <!-- This is where the user can drag and drop elements -->
+                        <div class="draggable-item" id="logoElement" style="top: 100px; left: 120px; display: none;">
+                            <img src="" alt="Logo" class="logo-preview" id="logoPreview">
+                            <div class="resize-handle"></div>
+                            <div class="design-element-controls">
+                                <button class="design-element-btn" onclick="rotateElement('logoElement', 15)"><i
+                                        class="fas fa-redo"></i></button>
+                                <button class="design-element-btn" onclick="removeElement('logoElement')"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="text-element" id="textElement" style="top: 50px; left: 100px; display: none;">
+                            <span id="textPreview">Your Text Here</span>
+                            <div class="design-element-controls">
+                                <button class="design-element-btn" onclick="rotateElement('textElement', 15)"><i
+                                        class="fas fa-redo"></i></button>
+                                <button class="design-element-btn" onclick="removeElement('textElement')"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customization-area">
+                    <div class="custom-controls">
+                        <div class="control-group">
+                            <h3 class="control-title">Add Logo</h3>
+                            <p>Choose from our logos or upload your own</p>
+
+                            <div class="logo-options">
+                                <div class="logo-option"
+                                    onclick="selectLogo('https://i.ibb.co/7Q2L7zC/chef-apron.png')">
+                                    <img src="https://i.ibb.co/7Q2L7zC/chef-apron.png" alt="Chef Hat">
+                                </div>
+                                <div class="logo-option" onclick="selectLogo('https://i.ibb.co/0Q0b1Zj/bib-apron.png')">
+                                    <img src="https://i.ibb.co/0Q0b1Zj/bib-apron.png" alt="Cooking Pot">
+                                </div>
+                                <div class="logo-option"
+                                    onclick="selectLogo('https://i.ibb.co/6RJQmCk/waist-apron.png')">
+                                    <img src="https://i.ibb.co/6RJQmCk/waist-apron.png" alt="Utensils">
+                                </div>
+                            </div>
+
+                            <input type="file" id="logoUpload" accept="image/*" style="display: none;">
+                            <button class="btn" onclick="document.getElementById('logoUpload').click()">
+                                <i class="fas fa-upload"></i> Upload Logo
+                            </button>
+                        </div>
+
+                        <div class="control-group">
+                            <h3 class="control-title">Add Text</h3>
+                            <input type="text" id="textInput" placeholder="Enter your text here"
+                                oninput="updateTextPreview()">
+
+                            <div class="text-controls">
+                                <select id="fontSelect" onchange="updateTextStyle()">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Courier New">Courier New</option>
+                                    <option value="cursive">Cursive</option>
+                                </select>
+                                <input type="color" id="textColor" value="#000000" onchange="updateTextStyle()">
+                            </div>
+
+                            <div class="text-effect-options">
+                                <button class="text-effect-btn" onclick="toggleTextEffect('bold')">Bold</button>
+                                <button class="text-effect-btn" onclick="toggleTextEffect('italic')">Italic</button>
+                                <button class="text-effect-btn"
+                                    onclick="applyTextEffect('rotate(5deg)')">Rotate</button>
+                                <button class="text-effect-btn"
+                                    onclick="applyTextEffect('scaleX(1.5)')">Stretch</button>
+                            </div>
+
+                            <button class="btn btn-secondary" onclick="addTextToPreview()" style="margin-top: 1rem;">
+                                <i class="fas fa-plus"></i> Add Text to Apron
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-btns">
+                <button class="btn btn-outline" onclick="showStep(2)">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="btn" onclick="showStep(4)">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 4: Order -->
+        <div class="step-content" id="orderStep">
+            <div class="card">
+                <h2 class="card-title">Complete Your Order</h2>
+
+                <div class="preview-container">
+                    <div class="apron-preview" id="finalPreview">
+                        <!-- Final preview of the apron -->
+                        <img id="finalApronStyle" src="https://i.ibb.co/0Q0b1Zj/bib-apron.png" alt="Apron Style"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                        <img id="finalLogo" src="" alt="Logo"
+                            style="position: absolute; top: 100px; left: 120px; max-width: 80px; display: none;">
+                        <div id="finalText"
+                            style="position: absolute; top: 50px; left: 100px; padding: 5px 10px; background: rgba(255, 255, 255, 0.8); border-radius: 4px; display: none;">
+                            Your Text</div>
+                    </div>
+                </div>
+
+                <div class="size-selection">
+                    <h3>Select Size</h3>
+                    <div class="size-options">
+                        <div class="size-option">S</div>
+                        <div class="size-option selected">M</div>
+                        <div class="size-option">L</div>
+                        <div class="size-option">XL</div>
+                        <div class="size-option">XXL</div>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+                    <input type="text" class="quantity-input" id="quantityInput" value="1">
+                    <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                </div>
+
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item">
+                        <span>Custom Apron</span>
+                        <span>$24.99</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Personalization</span>
+                        <span>$4.99</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Shipping</span>
+                        <span>$5.99</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span id="totalPrice">$35.97</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn" style="padding: 1rem 2rem; font-size: 1.2rem;">
+                        <i class="fas fa-shopping-cart"></i> Complete Order
+                    </button>
+                </div>
+            </div>
+
+            <div class="navigation-btns">
+                <button class="btn btn-outline" onclick="showStep(3)">
+                    <i class="fas fa-arrow-left"></i> Back to Design
+                </button>
+                <button class="btn btn-secondary" onclick="downloadDesign()">
+                    <i class="fas fa-download"></i> Download Design
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current step tracker
+        let currentStep = 1;
+        let quantity = 1;
+        let textEffects = {};
+
+        // Function to show a specific step
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show the selected step
+            document.getElementById(getStepId(stepNumber)).classList.add('active');
+
+            // Update progress bar
+            updateProgress(stepNumber);
+
+            // Update current step
+            currentStep = stepNumber;
+
+            // If moving to order step, update the final preview
+            if (stepNumber === 4) {
+                updateFinalPreview();
+            }
+        }
+
+        // Helper function to get step ID
+        function getStepId(stepNumber) {
+            const stepIds = {
+                1: 'styleStep',
+                2: 'colorStep',
+                3: 'customizeStep',
+                4: 'orderStep'
+            };
+            return stepIds[stepNumber];
+        }
+
+        // Update progress bar
+        function updateProgress(stepNumber) {
+            const progressPercentage = (stepNumber - 1) * 33.33;
+            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
+
+            // Update step indicators
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 < stepNumber) {
+                    step.classList.add('completed');
+                } else if (index + 1 === stepNumber) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize color selection
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function () {
+                // Remove selected class from all options
+                document.querySelectorAll('.color-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Add selected class to clicked option
+                this.classList.add('selected');
+
+                // Update apron preview color
+                const color = this.style.backgroundColor;
+                document.getElementById('apronPreview').style.backgroundColor = color;
+                document.getElementById('customizationArea').style.backgroundColor = color;
+                document.getElementById('finalPreview').style.backgroundColor = color;
+            });
+        });
+
+        // Initialize option selection
+        document.querySelectorAll('.option-item').forEach(option => {
+            option.addEventListener('click', function () {
+                // Remove selected class from all options
+                document.querySelectorAll('.option-item').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Add selected class to clicked option
+                this.classList.add('selected');
+
+                // Update apron style image
+                const imgSrc = this.querySelector('img').src;
+                document.querySelector('#apronPreview img').src = imgSrc;
+                document.getElementById('finalApronStyle').src = imgSrc;
+            });
+        });
+
+        // Initialize size selection
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function () {
+                // Remove selected class from all options
+                document.querySelectorAll('.size-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Add selected class to clicked option
+                this.classList.add('selected');
+            });
+        });
+
+        // Quantity update function
+        function updateQuantity(change) {
+            quantity += change;
+            if (quantity < 1) quantity = 1;
+            document.getElementById('quantityInput').value = quantity;
+            calculateTotal();
+        }
+
+        // Calculate order total
+        function calculateTotal() {
+            const apronPrice = 24.99;
+            const personalizationPrice = 4.99;
+            const shippingPrice = 5.99;
+
+            const total = (apronPrice + personalizationPrice) * quantity + shippingPrice;
+            document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Select logo from pre-defined options
+        function selectLogo(url) {
+            const logoElement = document.getElementById('logoElement');
+            const logoPreview = document.getElementById('logoPreview');
+
+            logoPreview.src = url;
+            logoElement.style.display = 'block';
+
+            initDraggable(logoElement);
+            initResizable(logoElement);
+        }
+
+        // Update text preview in input
+        function updateTextPreview() {
+            const text = document.getElementById('textInput').value;
+            document.getElementById('textPreview').textContent = text || 'Your Text Here';
+        }
+
+        // Update text style
+        function updateTextStyle() {
+            const font = document.getElementById('fontSelect').value;
+            const color = document.getElementById('textColor').value;
+
+            const textPreview = document.getElementById('textPreview');
+            textPreview.style.fontFamily = font;
+            textPreview.style.color = color;
+        }
+
+        // Toggle text effect
+        function toggleTextEffect(effect) {
+            const textPreview = document.getElementById('textPreview');
+
+            if (effect === 'bold') {
+                textPreview.style.fontWeight = textPreview.style.fontWeight === 'bold' ? 'normal' : 'bold';
+            } else if (effect === 'italic') {
+                textPreview.style.fontStyle = textPreview.style.fontStyle === 'italic' ? 'normal' : 'italic';
+            }
+
+            // Store effect for when text is added to apron
+            textEffects[effect] = textPreview.style[effect];
+        }
+
+        // Apply text effect
+        function applyTextEffect(transform) {
+            const textPreview = document.getElementById('textPreview');
+            textPreview.style.transform = transform;
+
+            // Store effect for when text is added to apron
+            textEffects.transform = transform;
+        }
+
+        // Add text to apron preview
+        function addTextToPreview() {
+            const textElement = document.getElementById('textElement');
+            textElement.style.display = 'block';
+
+            // Apply stored effects
+            const textPreview = document.getElementById('textPreview');
+            Object.keys(textEffects).forEach(effect => {
+                if (effect === 'bold') {
+                    textPreview.style.fontWeight = textEffects[effect];
+                } else if (effect === 'italic') {
+                    textPreview.style.fontStyle = textEffects[effect];
+                } else if (effect === 'transform') {
+                    textPreview.style.transform = textEffects[effect];
+                }
+            });
+
+            initDraggable(textElement);
+        }
+
+        // Rotate element
+        function rotateElement(elementId, degrees) {
+            const element = document.getElementById(elementId);
+            const currentRotation = element.dataset.rotation || 0;
+            const newRotation = parseInt(currentRotation) + degrees;
+
+            element.style.transform = `rotate(${newRotation}deg)`;
+            element.dataset.rotation = newRotation;
+        }
+
+        // Remove element
+        function removeElement(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        // Update final preview in order step
+        function updateFinalPreview() {
+            const logoElement = document.getElementById('logoElement');
+            const textElement = document.getElementById('textElement');
+            const finalLogo = document.getElementById('finalLogo');
+            const finalText = document.getElementById('finalText');
+
+            // Update logo in final preview
+            if (logoElement.style.display === 'block') {
+                const logoPreview = document.getElementById('logoPreview');
+                finalLogo.src = logoPreview.src;
+                finalLogo.style.display = 'block';
+                finalLogo.style.maxWidth = '80px';
+
+                // Apply rotation if any
+                if (logoElement.dataset.rotation) {
+                    finalLogo.style.transform = `rotate(${logoElement.dataset.rotation}deg)`;
+                }
+
+                // Position the logo
+                finalLogo.style.top = logoElement.style.top;
+                finalLogo.style.left = logoElement.style.left;
+            } else {
+                finalLogo.style.display = 'none';
+            }
+
+            // Update text in final preview
+            if (textElement.style.display === 'block') {
+                finalText.textContent = document.getElementById('textPreview').textContent;
+                finalText.style.display = 'block';
+
+                // Apply text styles
+                finalText.style.fontFamily = document.getElementById('textPreview').style.fontFamily;
+                finalText.style.color = document.getElementById('textPreview').style.color;
+                finalText.style.fontWeight = document.getElementById('textPreview').style.fontWeight;
+                finalText.style.fontStyle = document.getElementById('textPreview').style.fontStyle;
+                finalText.style.transform = document.getElementById('textPreview').style.transform;
+
+                // Position the text
+                finalText.style.top = textElement.style.top;
+                finalText.style.left = textElement.style.left;
+            } else {
+                finalText.style.display = 'none';
+            }
+        }
+
+        // Download design
+        function downloadDesign() {
+            alert('Design download functionality would be implemented here. In a real application, this would generate a PNG image of your design.');
+        }
+
+        // Initialize draggable functionality
+        function initDraggable(element) {
+            let isDragging = false;
+            let startX, startY, initialX, initialY;
+
+            element.addEventListener('mousedown', function (e) {
+                if (e.target.classList.contains('resize-handle')) return;
+
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                initialX = parseInt(getComputedStyle(element).left);
+                initialY = parseInt(getComputedStyle(element).top);
+
+                element.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', function (e) {
+                if (!isDragging) return;
+
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+
+                element.style.left = `${initialX + dx}px`;
+                element.style.top = `${initialY + dy}px`;
+            });
+
+            document.addEventListener('mouseup', function () {
+                isDragging = false;
+                element.style.cursor = 'grab';
+            });
+        }
+
+        // Initialize resizable functionality
+        function initResizable(element) {
+            const handle = element.querySelector('.resize-handle');
+            let isResizing = false;
+            let startX, startY, initialWidth, initialHeight;
+
+            handle.addEventListener('mousedown', function (e) {
+                isResizing = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                initialWidth = parseInt(getComputedStyle(element).width);
+                initialHeight = parseInt(getComputedStyle(element).height);
+
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', function (e) {
+                if (!isResizing) return;
+
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+
+                element.style.width = `${initialWidth + dx}px`;
+                element.style.height = `${initialHeight + dy}px`;
+            });
+
+            document.addEventListener('mouseup', function () {
+                isResizing = false;
+            });
+        }
+
+        // Handle logo upload
+        document.getElementById('logoUpload').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    selectLogo(event.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            updateProgress(currentStep);
+            calculateTotal();
+
+            // Initialize draggable and resizable for logo element
+            const logoElement = document.getElementById('logoElement');
+            initDraggable(logoElement);
+            initResizable(logoElement);
+
+            // Initialize draggable for text element
+            const textElement = document.getElementById('textElement');
+            initDraggable(textElement);
+
+            // Set up text preview
+            updateTextPreview();
+            updateTextStyle();
+        });
+    </script>
+</body>
+
+</html>
