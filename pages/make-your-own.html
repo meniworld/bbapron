@@ -39,6 +39,21 @@
             text-align: center;
             padding: 2rem 0;
             animation: fadeIn 1s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .flaticon-logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
         }
 
         header h1 {
@@ -249,6 +264,7 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
             color: var(--dark);
+            text-align: center;
         }
 
         .btn {
@@ -406,8 +422,8 @@
         .logo-preview {
             max-width: 100px;
             max-height: 100px;
-            margin-top: 1rem;
-            display: none;
+            display: block;
+            object-fit: contain;
         }
 
         .draggable-item {
@@ -415,6 +431,7 @@
             cursor: move;
             user-select: none;
             z-index: 10;
+            transform-origin: center center;
         }
 
         .resize-handle {
@@ -434,14 +451,27 @@
             margin-top: 1rem;
         }
 
+        /* FIXED: Removed background from text element */
         .text-element {
             position: absolute;
             cursor: move;
             user-select: none;
-            padding: 5px 10px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 4px;
+            padding: 8px 15px;
+            background: transparent !important;
+            /* Changed from rgba(255, 255, 255, 0.9) */
+            border-radius: 20px;
             z-index: 10;
+            min-width: 50px;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            /* Removed shadow */
+            white-space: pre-wrap;
+            word-break: break-word;
+            text-align: center;
+            line-height: 1.4;
         }
 
         .text-control-panel {
@@ -506,6 +536,15 @@
             header h1 {
                 font-size: 2.2rem;
             }
+
+            .logo-container {
+                flex-direction: column;
+            }
+
+            .flaticon-logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
         }
 
         .success-message {
@@ -524,6 +563,13 @@
             display: flex;
             gap: 0.5rem;
             margin-top: 0.5rem;
+            position: absolute;
+            bottom: -35px;
+            left: 0;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .design-element-btn {
@@ -574,13 +620,58 @@
             max-height: 100%;
             object-fit: contain;
         }
+
+        /* Corner handles for resizing - FIXED: Improved resizing functionality */
+        .corner-handle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 11;
+        }
+
+        .corner-handle.tl {
+            top: -6px;
+            left: -6px;
+            cursor: nwse-resize;
+        }
+
+        .corner-handle.tr {
+            top: -6px;
+            right: -6px;
+            cursor: nesw-resize;
+        }
+
+        .corner-handle.bl {
+            bottom: -6px;
+            left: -6px;
+            cursor: nesw-resize;
+        }
+
+        .corner-handle.br {
+            bottom: -6px;
+            right: -6px;
+            cursor: nwse-resize;
+        }
+
+        .element-outline {
+            position: absolute;
+            border: 2px dashed var(--primary);
+            border-radius: 5px;
+            pointer-events: none;
+            z-index: 9;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>Design Your Custom Apron</h1>
+            <div class="logo-container">
+                <h1>Design Your Custom Apron</h1>
+            </div>
             <p>Create a unique apron in just 3 simple steps - choose style, add personalization, and order!</p>
         </header>
 
@@ -588,11 +679,11 @@
             <div class="progress-bar"></div>
             <div class="progress-fill" id="progressFill"></div>
 
-            <div class="step completed" id="step1">
+            <div class="step active" id="step1">
                 1
                 <div class="step-label">Style</div>
             </div>
-            <div class="step active" id="step2">
+            <div class="step" id="step2">
                 2
                 <div class="step-label">Color</div>
             </div>
@@ -611,23 +702,23 @@
             <div class="card">
                 <h2 class="card-title">Choose Your Apron Style</h2>
                 <div class="options-grid">
-                    <div class="option-item selected">
-                        <img src="../assets/images/apron/apron (1).jpg" alt="Bib Apron">
+                    <div class="option-item selected" data-style="bib">
+                        <img src="https://placehold.co/200x200/ff6b6b/white?text=Bib+Apron" alt="Bib Apron">
                         <h3>Bib Apron</h3>
                         <p>Full coverage classic design</p>
                     </div>
-                    <div class="option-item">
-                        <img src="../assets/images/apron/apron (2).jpg" alt="Waist Apron">
+                    <div class="option-item" data-style="waist">
+                        <img src="https://placehold.co/200x200/4ecdc4/white?text=Waist+Apron" alt="Waist Apron">
                         <h3>Waist Apron</h3>
                         <p>Simple waist-only style</p>
                     </div>
-                    <div class="option-item">
-                        <img src="../assets/images/apron/apron (3).jpg" alt="Chef Apron">
+                    <div class="option-item" data-style="chef">
+                        <img src="https://placehold.co/200x200/ffd166/white?text=Chef+Apron" alt="Chef Apron">
                         <h3>Chef Apron</h3>
                         <p>Professional kitchen style</p>
                     </div>
-                    <div class="option-item">
-                        <img src="../assets/images/apron/apron (1).jpg" alt="Custom Shape">
+                    <div class="option-item" data-style="custom">
+                        <img src="https://placehold.co/200x200/6a0572/white?text=Custom+Shape" alt="Custom Shape">
                         <h3>Custom Shape</h3>
                         <p>Unique design pattern</p>
                     </div>
@@ -635,7 +726,7 @@
             </div>
 
             <div class="navigation-btns">
-                <div></div> <!-- Empty div for spacing -->
+                <div></div>
                 <button class="btn" onclick="showStep(2)">
                     Next <i class="fas fa-arrow-right"></i>
                 </button>
@@ -647,18 +738,17 @@
             <div class="card">
                 <h2 class="card-title">Choose Apron Color</h2>
                 <div class="color-options">
-                    <div class="color-option selected" style="background-color: #ff6b6b;"></div>
-                    <div class="color-option" style="background-color: #4ecdc4;"></div>
-                    <div class="color-option" style="background-color: #ffd166;"></div>
-                    <div class="color-option" style="background-color: #1a1a2e;"></div>
-                    <div class="color-option" style="background-color: #6a0572;"></div>
-                    <div class="color-option" style="background-color: #06d6a0;"></div>
+                    <div class="color-option selected" style="background-color: #ff6b6b;" data-color="#ff6b6b"></div>
+                    <div class="color-option" style="background-color: #4ecdc4;" data-color="#4ecdc4"></div>
+                    <div class="color-option" style="background-color: #ffd166;" data-color="#ffd166"></div>
+                    <div class="color-option" style="background-color: #1a1a2e;" data-color="#1a1a2e"></div>
+                    <div class="color-option" style="background-color: #6a0572;" data-color="#6a0572"></div>
+                    <div class="color-option" style="background-color: #06d6a0;" data-color="#06d6a0"></div>
                 </div>
 
                 <div class="preview-container">
                     <div class="apron-preview" id="apronPreview">
-                        <!-- Apron preview with style -->
-                        <img src="../assets/images/apron/apron (1).jpg" alt="Apron Style"
+                        <img src="https://placehold.co/300x350/ff6b6b/white?text=Bib+Apron" alt="Apron Style"
                             style="width: 100%; height: 100%; object-fit: contain;">
                     </div>
                 </div>
@@ -681,10 +771,15 @@
 
                 <div class="preview-container">
                     <div class="apron-preview" id="customizationArea">
-                        <!-- This is where the user can drag and drop elements -->
-                        <div class="draggable-item" id="logoElement" style="top: 100px; left: 120px; display: none;">
+                        <div class="element-outline" id="logoOutline" style="display: none;"></div>
+                        <div class="element-outline" id="textOutline" style="display: none;"></div>
+
+                        <div class="draggable-item" id="logoElement" style="top: 50px; left: 100px; display: none;">
                             <img src="" alt="Logo" class="logo-preview" id="logoPreview">
-                            <div class="resize-handle"></div>
+                            <div class="corner-handle tl"></div>
+                            <div class="corner-handle tr"></div>
+                            <div class="corner-handle bl"></div>
+                            <div class="corner-handle br"></div>
                             <div class="design-element-controls">
                                 <button class="design-element-btn" onclick="rotateElement('logoElement', 15)"><i
                                         class="fas fa-redo"></i></button>
@@ -693,8 +788,12 @@
                             </div>
                         </div>
 
-                        <div class="text-element" id="textElement" style="top: 50px; left: 100px; display: none;">
+                        <div class="text-element" id="textElement" style="top: 150px; left: 80px; display: none;">
                             <span id="textPreview">Your Text Here</span>
+                            <div class="corner-handle tl"></div>
+                            <div class="corner-handle tr"></div>
+                            <div class="corner-handle bl"></div>
+                            <div class="corner-handle br"></div>
                             <div class="design-element-controls">
                                 <button class="design-element-btn" onclick="rotateElement('textElement', 15)"><i
                                         class="fas fa-redo"></i></button>
@@ -713,15 +812,17 @@
 
                             <div class="logo-options">
                                 <div class="logo-option"
-                                    onclick="selectLogo('https://i.ibb.co/7Q2L7zC/chef-apron.png')">
-                                    <img src="https://i.ibb.co/7Q2L7zC/chef-apron.png" alt="Chef Hat">
-                                </div>
-                                <div class="logo-option" onclick="selectLogo('https://i.ibb.co/0Q0b1Zj/bib-apron.png')">
-                                    <img src="https://i.ibb.co/0Q0b1Zj/bib-apron.png" alt="Cooking Pot">
+                                    onclick="selectLogo('https://cdn-icons-png.flaticon.com/512/1355/1355897.png')">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1355/1355897.png" alt="Chef Hat">
                                 </div>
                                 <div class="logo-option"
-                                    onclick="selectLogo('https://i.ibb.co/6RJQmCk/waist-apron.png')">
-                                    <img src="https://i.ibb.co/6RJQmCk/waist-apron.png" alt="Utensils">
+                                    onclick="selectLogo('https://cdn-icons-png.flaticon.com/512/3448/3448635.png')">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3448/3448635.png"
+                                        alt="Cooking Pot">
+                                </div>
+                                <div class="logo-option"
+                                    onclick="selectLogo('https://cdn-icons-png.flaticon.com/512/2714/2714989.png')">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2714/2714989.png" alt="Utensils">
                                 </div>
                             </div>
 
@@ -733,8 +834,8 @@
 
                         <div class="control-group">
                             <h3 class="control-title">Add Text</h3>
-                            <input type="text" id="textInput" placeholder="Enter your text here"
-                                oninput="updateTextPreview()">
+                            <textarea id="textInput" placeholder="Enter your text here (use Enter for new lines)"
+                                oninput="updateTextPreview()" rows="3"></textarea>
 
                             <div class="text-controls">
                                 <select id="fontSelect" onchange="updateTextStyle()">
@@ -780,13 +881,12 @@
 
                 <div class="preview-container">
                     <div class="apron-preview" id="finalPreview">
-                        <!-- Final preview of the apron -->
-                        <img id="finalApronStyle" src="https://i.ibb.co/0Q0b1Zj/bib-apron.png" alt="Apron Style"
-                            style="width: 100%; height: 100%; object-fit: contain;">
+                        <img id="finalApronStyle" src="https://placehold.co/300x350/ff6b6b/white?text=Bib+Apron"
+                            alt="Apron Style" style="width: 100%; height: 100%; object-fit: contain;">
                         <img id="finalLogo" src="" alt="Logo"
-                            style="position: absolute; top: 100px; left: 120px; max-width: 80px; display: none;">
+                            style="position: absolute; max-width: 80px; display: none;">
                         <div id="finalText"
-                            style="position: absolute; top: 50px; left: 100px; padding: 5px 10px; background: rgba(255, 255, 255, 0.8); border-radius: 4px; display: none;">
+                            style="position: absolute; padding: 8px 15px; background: transparent; border-radius: 20px; display: none; white-space: pre-wrap;">
                             Your Text</div>
                     </div>
                 </div>
@@ -851,6 +951,8 @@
         let currentStep = 1;
         let quantity = 1;
         let textEffects = {};
+        let selectedColor = '#ff6b6b';
+        let selectedStyle = 'bib';
 
         // Function to show a specific step
         function showStep(stepNumber) {
@@ -913,10 +1015,10 @@
                 this.classList.add('selected');
 
                 // Update apron preview color
-                const color = this.style.backgroundColor;
-                document.getElementById('apronPreview').style.backgroundColor = color;
-                document.getElementById('customizationArea').style.backgroundColor = color;
-                document.getElementById('finalPreview').style.backgroundColor = color;
+                selectedColor = this.getAttribute('data-color');
+                document.getElementById('apronPreview').style.backgroundColor = selectedColor;
+                document.getElementById('customizationArea').style.backgroundColor = selectedColor;
+                document.getElementById('finalPreview').style.backgroundColor = selectedColor;
             });
         });
 
@@ -931,8 +1033,9 @@
                 // Add selected class to clicked option
                 this.classList.add('selected');
 
-                // Update apron style image
-                const imgSrc = this.querySelector('img').src;
+                // Update apron style
+                selectedStyle = this.getAttribute('data-style');
+                const imgSrc = `https://placehold.co/300x350/${selectedColor.replace('#', '')}/white?text=${selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1)}+Apron`;
                 document.querySelector('#apronPreview img').src = imgSrc;
                 document.getElementById('finalApronStyle').src = imgSrc;
             });
@@ -976,9 +1079,28 @@
 
             logoPreview.src = url;
             logoElement.style.display = 'block';
+            document.getElementById('logoOutline').style.display = 'block';
+            updateElementOutline('logoElement', 'logoOutline');
 
-            initDraggable(logoElement);
-            initResizable(logoElement);
+            // Initialize only if not already initialized
+            if (!logoElement.dataset.initialized) {
+                initDraggable(logoElement);
+                initResizable(logoElement);
+                logoElement.dataset.initialized = true;
+            }
+        }
+
+        // Update element outline
+        function updateElementOutline(elementId, outlineId) {
+            const element = document.getElementById(elementId);
+            const outline = document.getElementById(outlineId);
+
+            if (element && outline) {
+                outline.style.width = element.offsetWidth + 'px';
+                outline.style.height = element.offsetHeight + 'px';
+                outline.style.top = element.offsetTop + 'px';
+                outline.style.left = element.offsetLeft + 'px';
+            }
         }
 
         // Update text preview in input
@@ -1024,6 +1146,8 @@
         function addTextToPreview() {
             const textElement = document.getElementById('textElement');
             textElement.style.display = 'block';
+            document.getElementById('textOutline').style.display = 'block';
+            updateElementOutline('textElement', 'textOutline');
 
             // Apply stored effects
             const textPreview = document.getElementById('textPreview');
@@ -1037,7 +1161,12 @@
                 }
             });
 
-            initDraggable(textElement);
+            // Initialize only if not already initialized
+            if (!textElement.dataset.initialized) {
+                initDraggable(textElement);
+                initResizable(textElement);
+                textElement.dataset.initialized = true;
+            }
         }
 
         // Rotate element
@@ -1048,11 +1177,19 @@
 
             element.style.transform = `rotate(${newRotation}deg)`;
             element.dataset.rotation = newRotation;
+
+            // Update outline
+            updateElementOutline(elementId, elementId === 'logoElement' ? 'logoOutline' : 'textOutline');
         }
 
         // Remove element
         function removeElement(elementId) {
             document.getElementById(elementId).style.display = 'none';
+            if (elementId === 'logoElement') {
+                document.getElementById('logoOutline').style.display = 'none';
+            } else {
+                document.getElementById('textOutline').style.display = 'none';
+            }
         }
 
         // Update final preview in order step
@@ -1092,6 +1229,7 @@
                 finalText.style.fontWeight = document.getElementById('textPreview').style.fontWeight;
                 finalText.style.fontStyle = document.getElementById('textPreview').style.fontStyle;
                 finalText.style.transform = document.getElementById('textPreview').style.transform;
+                finalText.style.background = 'transparent'; // Remove background
 
                 // Position the text
                 finalText.style.top = textElement.style.top;
@@ -1112,7 +1250,7 @@
             let startX, startY, initialX, initialY;
 
             element.addEventListener('mousedown', function (e) {
-                if (e.target.classList.contains('resize-handle')) return;
+                if (e.target.classList.contains('corner-handle')) return;
 
                 isDragging = true;
                 startX = e.clientX;
@@ -1132,6 +1270,9 @@
 
                 element.style.left = `${initialX + dx}px`;
                 element.style.top = `${initialY + dy}px`;
+
+                // Update outline
+                updateElementOutline(element.id, element.id === 'logoElement' ? 'logoOutline' : 'textOutline');
             });
 
             document.addEventListener('mouseup', function () {
@@ -1140,20 +1281,27 @@
             });
         }
 
-        // Initialize resizable functionality
+        // Initialize resizable functionality with corner handles - FIXED: Improved resizing
         function initResizable(element) {
-            const handle = element.querySelector('.resize-handle');
+            const handles = element.querySelectorAll('.corner-handle');
             let isResizing = false;
-            let startX, startY, initialWidth, initialHeight;
+            let startX, startY, initialWidth, initialHeight, initialLeft, initialTop;
+            let currentHandle = null;
 
-            handle.addEventListener('mousedown', function (e) {
-                isResizing = true;
-                startX = e.clientX;
-                startY = e.clientY;
-                initialWidth = parseInt(getComputedStyle(element).width);
-                initialHeight = parseInt(getComputedStyle(element).height);
+            handles.forEach(handle => {
+                handle.addEventListener('mousedown', function (e) {
+                    isResizing = true;
+                    currentHandle = this;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    initialWidth = element.offsetWidth;
+                    initialHeight = element.offsetHeight;
+                    initialLeft = parseInt(getComputedStyle(element).left);
+                    initialTop = parseInt(getComputedStyle(element).top);
 
-                e.preventDefault();
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
             });
 
             document.addEventListener('mousemove', function (e) {
@@ -1162,12 +1310,67 @@
                 const dx = e.clientX - startX;
                 const dy = e.clientY - startY;
 
-                element.style.width = `${initialWidth + dx}px`;
-                element.style.height = `${initialHeight + dy}px`;
+                // FIXED: Improved resizing logic for logo and text elements
+                if (currentHandle.classList.contains('tl')) {
+                    // Top-left handle
+                    const newWidth = Math.max(initialWidth - dx, 30);
+                    element.style.width = `${newWidth}px`;
+
+                    if (element.id === 'logoElement') {
+                        // Maintain aspect ratio for logo
+                        element.style.height = `${newWidth}px`;
+                    } else {
+                        element.style.height = `${Math.max(initialHeight - dy, 30)}px`;
+                    }
+
+                    element.style.left = `${initialLeft + dx}px`;
+                    element.style.top = `${initialTop + dy}px`;
+                } else if (currentHandle.classList.contains('tr')) {
+                    // Top-right handle
+                    const newWidth = Math.max(initialWidth + dx, 30);
+                    element.style.width = `${newWidth}px`;
+
+                    if (element.id === 'logoElement') {
+                        // Maintain aspect ratio for logo
+                        element.style.height = `${newWidth}px`;
+                    } else {
+                        element.style.height = `${Math.max(initialHeight - dy, 30)}px`;
+                    }
+
+                    element.style.top = `${initialTop + dy}px`;
+                } else if (currentHandle.classList.contains('bl')) {
+                    // Bottom-left handle
+                    const newWidth = Math.max(initialWidth - dx, 30);
+                    element.style.width = `${newWidth}px`;
+
+                    if (element.id === 'logoElement') {
+                        // Maintain aspect ratio for logo
+                        element.style.height = `${newWidth}px`;
+                    } else {
+                        element.style.height = `${Math.max(initialHeight + dy, 30)}px`;
+                    }
+
+                    element.style.left = `${initialLeft + dx}px`;
+                } else if (currentHandle.classList.contains('br')) {
+                    // Bottom-right handle
+                    const newWidth = Math.max(initialWidth + dx, 30);
+                    element.style.width = `${newWidth}px`;
+
+                    if (element.id === 'logoElement') {
+                        // Maintain aspect ratio for logo
+                        element.style.height = `${newWidth}px`;
+                    } else {
+                        element.style.height = `${Math.max(initialHeight + dy, 30)}px`;
+                    }
+                }
+
+                // Update outline
+                updateElementOutline(element.id, element.id === 'logoElement' ? 'logoOutline' : 'textOutline');
             });
 
             document.addEventListener('mouseup', function () {
                 isResizing = false;
+                currentHandle = null;
             });
         }
 
@@ -1188,14 +1391,52 @@
             updateProgress(currentStep);
             calculateTotal();
 
-            // Initialize draggable and resizable for logo element
-            const logoElement = document.getElementById('logoElement');
-            initDraggable(logoElement);
-            initResizable(logoElement);
+            // Initialize option selection
+            document.querySelectorAll('.option-item').forEach(option => {
+                option.addEventListener('click', function () {
+                    document.querySelectorAll('.option-item').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
 
-            // Initialize draggable for text element
-            const textElement = document.getElementById('textElement');
-            initDraggable(textElement);
+                    selectedStyle = this.getAttribute('data-style');
+                    const colorHex = selectedColor.replace('#', '');
+                    const imgSrc = `https://placehold.co/300x350/${colorHex}/white?text=${selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1)}+Apron`;
+                    document.querySelector('#apronPreview img').src = imgSrc;
+                    document.getElementById('finalApronStyle').src = imgSrc;
+                });
+            });
+
+            // Initialize color selection
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function () {
+                    document.querySelectorAll('.color-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+
+                    selectedColor = this.getAttribute('data-color');
+                    document.getElementById('apronPreview').style.backgroundColor = selectedColor;
+                    document.getElementById('customizationArea').style.backgroundColor = selectedColor;
+                    document.getElementById('finalPreview').style.backgroundColor = selectedColor;
+
+                    // Update apron image with new color
+                    const colorHex = selectedColor.replace('#', '');
+                    const imgSrc = `https://placehold.co/300x350/${colorHex}/white?text=${selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1)}+Apron`;
+                    document.querySelector('#apronPreview img').src = imgSrc;
+                    document.getElementById('finalApronStyle').src = imgSrc;
+                });
+            });
+
+            // Initialize size selection
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function () {
+                    document.querySelectorAll('.size-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
 
             // Set up text preview
             updateTextPreview();
