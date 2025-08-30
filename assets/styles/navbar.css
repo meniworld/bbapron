@@ -175,13 +175,20 @@
 /* ===============================
    RESPONSIVE STYLES
 ================================= */
-
-/* Medium screens */
-@media (max-width: 980px) {
+/* Tablet fix: 1180px down to 769px */
+@media (max-width: 1180px) and (min-width: 769px) {
     .mega-dropdown {
-        width: 95vw;
+        position: fixed;
+        /* change from absolute to fixed */
+        top: 80px;
+        /* distance from top nav */
         left: 50%;
-        transform: translate(-50%, 6px);
+        transform: translateX(-50%);
+        width: 90vw;
+        max-width: 1000px;
+        min-width: 600px;
+        z-index: 9999;
+        /* above other content */
     }
 }
 
