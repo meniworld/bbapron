@@ -1,0 +1,55 @@
+/* Floating Button Container */
+.floating-appointment-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    z-index: 9999;
+    transition: all 0.5s ease;
+}
+
+/* Make it responsive */
+@media (max-width: 768px) {
+    .floating-appointment-btn {
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* Button Animation */
+#appointmentContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 22px;
+    font-size: 16px;
+    transition: all 0.5s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+}
+
+/* Icon Style */
+#appointmentContent img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    /* initially hidden */
+    margin: 0;
+}
+
+/* Animation for hover */
+.floating-appointment-btn a:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Smooth fade for text/icon change */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}

@@ -35,9 +35,17 @@
     <link rel="stylesheet" href="assets/styles/product-details.css">
     <link rel="stylesheet" href="assets/styles/registration.css">
     <link rel="stylesheet" href="assets/styles/feature-section.css">
+    <link rel="stylesheet" href="assets/styles/floating-button.css">
 </head>
 
 <body>
+    <!-- Add this at the end of your body -->
+    <div class="floating-appointment-btn" id="appointmentBtn">
+        <a href="/appointment" class="btn btn-primary" id="appointmentContent">
+            Make an Appointment
+        </a>
+    </div>
+
     <!-- Nav Bar Section -->
     <nav class="navbar">
         <div class="nav-container">
@@ -741,7 +749,6 @@
                     <li><a href="pages/blog.html">Blog</a></li>
                 </ul>
             </div>
-
             <!-- Policies Section -->
             <div class="footer-section policies">
                 <h3>Policies</h3>
@@ -779,6 +786,7 @@
     <script src="assets/scripts/user-password-change.js"></script>
     <script src="assets/scripts/product-detail.js"></script>
     <script src="assets/scripts/registration.js"></script>
+    <script src="assets/scripts/floating-button.js"></script>
 </body>
 
 </html>
