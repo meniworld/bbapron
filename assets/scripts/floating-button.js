@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(() => {
             // Use your local image path here
-            btnContent.innerHTML = '<img src="/assets/images/appointment.png" alt="Appointment Icon">';
+            btnContent.innerHTML = '<img src="assets/images/appointment.png" alt="Appointment Icon">';
 
             const img = btnContent.querySelector('img');
             img.style.display = 'block';  // make sure it is visible
