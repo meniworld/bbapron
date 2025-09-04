@@ -175,6 +175,7 @@
 /* ===============================
    RESPONSIVE STYLES
 ================================= */
+
 /* Tablet fix: 1180px down to 769px */
 @media (max-width: 1180px) and (min-width: 769px) {
     .mega-dropdown {
@@ -192,57 +193,89 @@
     }
 }
 
-/* Mobile: full screen nav + stacked mega menu */
+/* Mobile: full screen nav + centered stacked mega menu */
 @media (max-width: 768px) {
+
+    /* Navbar container wrap */
     .nav-container {
         flex-wrap: wrap;
     }
 
+    /* Show hamburger */
     .nav-toggle {
         display: flex;
     }
 
+    /* Mobile nav links */
     .nav-links {
         position: absolute;
-        top: 100%;
+        top: 80px;
         left: 0;
         width: 100%;
         background: var(--color-white);
+        text-align: center;
         display: none;
         flex-direction: column;
-        padding: 10px 0;
+        padding: 0;
         max-height: calc(100vh - 80px);
         overflow-y: auto;
+        z-index: 9999;
     }
 
+    /* Show nav when toggle active */
     .nav-links.show {
         display: flex;
         animation: slideDown .3s ease forwards;
     }
 
-    /* Mega dropdown in mobile: full width stacked */
-    .nav-links .dropdown .mega-dropdown {
-        position: static;
+    /* Each dropdown parent */
+    .nav-links .dropdown {
+        position: relative;
         width: 100%;
-        max-width: 100%;
-        display: none;
-        transform: none;
-        opacity: 1;
-        visibility: visible;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 20px;
     }
 
+    /* Centered mega dropdown under trigger */
+    .nav-links .dropdown .mega-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 10%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        display: none;
+        padding: 20px 15px;
+        border-radius: 8px;
+        background-color: var(--color-primary-dark);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+    }
+
+    /* Show mega on dropdown click */
     .nav-links .dropdown.open .mega-dropdown {
         display: block;
+        animation: slideDown .3s ease forwards;
     }
 
+    /* Stack mega content */
     .mega-content {
-        grid-template-columns: 1fr;
-        /* stack */
-        gap: 20px;
+        grid-template-columns: 1fr !important;
+        gap: 15px;
     }
+
+    .mega-content h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+
+    .mega-content ul li {
+        margin-bottom: 10px;
+    }
+
+    .mega-content a {
+        color: #fff;
+    }
+
 }
 
 /* slide animation */
